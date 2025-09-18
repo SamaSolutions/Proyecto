@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    # Activar el motor de reescritura
+    RewriteEngine On
+    RewriteBase /
+    
+    # No redireccionar archivos y directorios existentes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Redirigir todas las demás peticiones a index.php
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+# Prevenir el listado de directorios
+Options -Indexes
+
+# Establecer el tipo de contenido predeterminado
+DefaultType text/html
+
+# Forzar UTF-8 para ciertos tipos de archivos
+<IfModule mod_mime.c>
+    AddCharset UTF-8 .html .css .js .xml .json .rss
+</IfModule>
