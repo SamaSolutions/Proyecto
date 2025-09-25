@@ -2,7 +2,7 @@
 
   <?php foreach($servicios as $servicio): ?>
     <a class="servicio" href="/compra">
-      <h3><strong>Categoria:</strong> <?= htmlspecialchars($servicio['categoria']) ?></h3>
+      <h3><strong>Categoria:</strong> <?= htmlspecialchars($_GET['categoria']) ?></h3>
       <p><strong>Tipo:</strong> <?= htmlspecialchars($servicio['tipo']) ?></p>
        <p><strong>Descripcion:</strong> <?= htmlspecialchars($servicio['descripcion']) ?></p>
        <p><strong>Duracion:</strong> <?= htmlspecialchars($servicio['duracion']) ?></p>

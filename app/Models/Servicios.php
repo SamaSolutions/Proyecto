@@ -9,14 +9,27 @@ class Servicios extends Model {
         protected $primaryKey='idServicio';
     
     public function findByCategoria($categoria){
-     $query = $this->db->query("SELECT pds.razon_social, s.precio_estimado, s.descripcion, s.duracion, s.tipo, s.categoria from servicios s JOIN proveedores_de_sl pds on(s.rutProveedor=pds.rutProveedor) where categoria = ?",
+    $query = $this->db->query("
+        SELECT 
+            u.razon_social,
+            s.precio_estimado,
+            s.descripcion,
+            s.duracion,
+            s.nombre AS tipo,
+            c.IdCategoria
+        FROM Servicios s
+        JOIN pertenecen p ON s.IdServicio = p.IdServicio
+        JOIN Categorias c ON p.IdCategoria = c.IdCategoria
+        JOIN ofrecen o ON s.IdServicio = o.IdServicio
+        JOIN Usuarios u ON o.rutUVendedor = u.rutUsuario
+        WHERE c.nombre = ?",
+   [$categoria]
+    );
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
 
-     [$categoria]     
-     );
-     return $query->fetchAll(PDO::FETCH_ASSOC); 
- }
     public function CategoriasTodos(){
-     $query = $this->db->query("SELECT * from categorias");
+     $query = $this->db->query("SELECT * from Categorias");
     return $query->fetchAll();
     }
 }
