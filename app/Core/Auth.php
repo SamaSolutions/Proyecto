@@ -40,12 +40,10 @@ class Auth {
      */
     public function attempt($email, $password) {
         $user = $this->userModel->findByEmail($email);
-         echo "agua";
-         var_dump($user); 
+
         if ($user && password_verify($password, $user['password_hash'])) {
             // No almacenar la contraseña en la sesión
             unset($user["password_hash"]);
-            echo "entre omg";
             $this->session->set("user", $user);
             return true;
         }        

@@ -82,7 +82,7 @@ class AuthController extends Controller {
         'localidad' => 'required|max:100',
         'calle' => 'required|min:3|max:100',
         'numero_puerta' => 'required|numeric|max:11',
-        'password' => 'required|min:8|max:255'
+        'password' => 'required|min:8|max:64'
     ]);
 
     if ($password !== $passwordConfirm) {
@@ -107,7 +107,10 @@ class AuthController extends Controller {
         return $this->render('auth/register', [
             'title' => 'Registro de Usuario',
             'errors' => $errors,
-            'input' => compact('rut','nombre','apellido','email','numeroTelefonico','localidad','calle','numero_puerta')
+            'input' => [
+               'rut' => $rut, 
+               'nombre' => $nombre
+           ]
         ]);
     }
 

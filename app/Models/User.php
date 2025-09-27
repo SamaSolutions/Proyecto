@@ -42,7 +42,7 @@ class User extends Model {
     }
     
     public function create(array $data) {     
-  
+       
      $this->db->query(
             "INSERT INTO Personas (rut, nombre, apellido, localidad, email, nro, calle) VALUES (?,?,?,?,?,?,?)",
             [
@@ -69,7 +69,7 @@ class User extends Model {
             "INSERT INTO Contraseñas (rutPersona, hash_contraseña, estado) VALUES (?,?,?)",
             [
                 $data['rut'],
-                password_hash($data['password'], PASSWORD_BCRYPT),
+                $data['password'],
                 $data['estado']
             ]
         );
@@ -85,7 +85,7 @@ class User extends Model {
                 ''
             ]
         );
-        return $this->db->lastInsertId();
+        return $data['rut'];
     
     }
     
