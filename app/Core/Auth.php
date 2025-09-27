@@ -40,15 +40,15 @@ class Auth {
      */
     public function attempt($email, $password) {
         $user = $this->userModel->findByEmail($email);
-        
-        if ($user && password_verify($password, $user["hash_contraseña"])) {
+         echo "agua";
+         var_dump($user); 
+        if ($user && password_verify($password, $user['password_hash'])) {
             // No almacenar la contraseña en la sesión
-            unset($user["hash_contraseña"]);
-            
+            unset($user["password_hash"]);
+            echo "entre omg";
             $this->session->set("user", $user);
             return true;
-        }
-        
+        }        
         return false;
     }
 
@@ -66,14 +66,6 @@ class Auth {
         return $this->userModel->create($userData);
     }
     
-    public function registerProveedor($proveedorData) {
-       $proveedorModel= new \App\Models\Proveedor();
-        // Encriptar la contraseña
-        $proveedorData["password"] = password_hash($proveedorData["password"], PASSWORD_DEFAULT);
-
-        // Crear el usuario
-        return $proveedorModel->create($proveedorData);
-    }
 
     /**
      * Obtiene el usuario autenticado

@@ -29,7 +29,7 @@
 
         <div>
             <label>Telefono:</label>
-            <input type="tel" name="numeroTelefonico" pattern="(09\d{7}|2\d{7})" required value="<?= $this->e($input['numeroTelefonico'] ?? '') ?>">
+            <input type="tel" name="numeroTelefonico" maxlength="20" pattern="(09\d{7}|2\d{7})" required value="<?= $this->e($input['numeroTelefonico'] ?? '') ?>">
         </div>
 
  
@@ -86,8 +86,6 @@
             <label>Confirmar Contraseña:</label>
             <input type="password" name="password_confirm" required>
         </div>
-       <p>¿Eres un proveedor? <a href="/registerProveedor">Registrarse como proveedor</a></p>
-      
         <button type="submit">Registrarse</button>
     </form>
     <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
