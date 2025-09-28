@@ -12,9 +12,23 @@
     
   <div class="auth">
    <?php if ($auth['check']): ?>
-    <a href="/logout" class="<?= ($currentUrl === '/logout') ? 'active' : '' ?>">
-      <span class="icon-user">👤</span>Salir
-    </a>
+   
+    <?php $nombreUsuario = $nombre ?? 'Mi Cuenta'; ?>
+
+<div class="dropdown-perfil">
+    
+ <button class="dropdown-toggle" onclick="toggleDropdown()">
+        
+        <span class="nombre-usuario"><?= htmlspecialchars($nombreUsuario) ?></span>
+        <span class="icono-flecha">&#9662;</span> <!-- Flecha hacia abajo -->
+    </button>
+
+    <div id="perfilDropdownMenu" class="dropdown-menu">
+        <a href="/perfil" class="dropdown-item">Mi Perfil</a>
+        <a href="/logout" class="dropdown-item">Salir (Logout)</a>
+    </div>
+</div> 
+   <script src="js/perfil.js"></script>   
    <?php else: ?>
     <a href="/login" class="<?= ($currentUrl === '/login') ? 'active' : '' ?>">
       <span class="icon-user">👤</span> Acceder

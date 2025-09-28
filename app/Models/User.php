@@ -25,6 +25,14 @@ class User extends Model {
         );
         return $query->fetch();
     } 
+   
+    public function findAdmin($rut){
+      $query = $this->db->query(
+       "SELECT rutAdmin from Admin where rutAdmin = ? LIMIT 1",
+        [$rut]
+      );
+      return $query->fetch();
+    }
     
     public function findByTel($tel){
       $query = $this->db->query(
@@ -39,6 +47,23 @@ class User extends Model {
       "SELECT * FROM Personas p JOIN Personas_Telefonos pt on(p.rut=pt.rutPersona)"
      );
      return $query->fetch();
+    }
+    
+    public function getDatosPerfil($rut){
+   
+     $query = $this->db->query("SELECT * FROM Usuarios where rutUsuario = ?", 
+     [$rut]
+     );
+     return $query->fetch();
+    }
+    
+    public function calcularValoracionPromedio($rut){
+    
+     $this->db->query("
+      SELECT AVG(puntaje) AS valoracion_promedio 
+      FROM Valoraciones
+      WHERE rutUsuario = ?", [$rut]
+     );
     }
     
     public function create(array $data) {     
@@ -88,5 +113,30 @@ class User extends Model {
         return $data['rut'];
     
     }
-    
+   
+   /**
+ * Actualiza los campos de perfil en la tabla Usuarios.
+ * @param string $rut El RUT del usuario a actualizar.
+ * @param array $data Los datos a actualizar.
+ * @return bool Retorna verdadero si la actualización fue exitosa.
+ */
+public function actualizarDatosPerfil($rut, $data) {
+    // 1. Define la consulta SQL UPDATE
+    // Usamos marcadores de posición (?) para todos los valores, incluyendo el RUT.
+    $this->db->query("
+        UPDATE Usuarios 
+        SET 
+            descripcion_del_perfil = ?,
+            especialidad = ?,
+            experiencia = ?,
+            disponibilidad = ?
+        WHERE rutUsuario = ?",[
+        $data['descripcion'],
+        $data['especialidad'],
+        $data['experiencia'],
+        $data['disponibilidad'],
+        $rut
+    ]);
+
+ }    
 }

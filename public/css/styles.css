@@ -105,7 +105,11 @@
       font-family: 'Montserrat', sans-serif;
       transition: background 0.2s
     }
-
+    
+    .boton-tuservicio:hover{
+     background-color: #8A2BE2;
+    }
+    
     .imagen img {
      max-width: 400px;
      height: auto;
@@ -150,7 +154,7 @@
  }
 
  .boton-explorar:hover {
-   background-color: #0056b3;
+   background-color: #8A2BE2;
  }
     
     .tipo {
@@ -702,4 +706,176 @@
 .paginacion-link:first-child,
 .paginacion-link:last-child {
     min-width: 80px;
+}
+
+/* ------------------------------------------- */
+/* --- Menú Desplegable de Perfil (Dropdown) --- */
+/* ------------------------------------------- */
+
+/* Contenedor principal del dropdown */
+.dropdown-perfil {
+    position: relative;
+    display: inline-block;
+}
+
+/* El botón que activa el menú */
+.dropdown-toggle {
+    background-color: #673ab7;
+    color: white; /* Color de texto estándar */
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid transparent; /* Borde sutil para minimalismo */
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+    background-color: #8A2BE2; /* Fondo muy claro al pasar el mouse */
+    border-color: #673ab7; /* Borde al color de tu paleta */
+}
+
+.nombre-usuario {
+    margin-right: 8px;
+    font-weight: 500;
+}
+
+.icono-flecha {
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+/* Contenido del menú desplegable */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0; /* Lo alinea a la derecha del botón */
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    overflow: hidden; /* Para que los bordes redondeados se apliquen a los ítems */
+}
+
+/* Clase para mostrar el menú */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Estilo para los ítems del menú (Mi Perfil, Salir) */
+.dropdown-item {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5; /* Fondo muy suave */
+    color: #673ab7; /* Color de texto de tu paleta */
+}
+
+/* Ítem de salir/logout para darle un toque diferente */
+.dropdown-item:last-child {
+    border-top: 1px solid #eee;
+}
+
+/* ------------------------------------------- */
+/* --- Estilos para la Página de Perfil --- */
+/* ------------------------------------------- */
+
+.perfil-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.perfil-container h1 {
+    color: #333;
+    text-align: center;
+    border-bottom: 2px solid #673ab7;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* --- Sección de Valoración (No Editable) --- */
+.valoracion-box {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+.valoracion-box h2 {
+    color: #673ab7;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.valoracion-display {
+    font-size: 3em;
+    font-weight: bold;
+    color: #673ab7;
+    margin: 0;
+}
+
+/* --- Formulario de Edición --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.perfil-form input[type="text"],
+.perfil-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    transition: border-color 0.2s;
+}
+
+.perfil-form input[type="text"]:focus,
+.perfil-form textarea:focus {
+    border-color: #673ab7;
+    outline: none;
+    box-shadow: 0 0 5px rgba(103, 58, 183, 0.3);
+}
+
+.btn-guardar {
+    display: block;
+    width: fit-content;
+    margin:0 auto;
+    background-color: #673ab7;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    margin-top: 15px;
+    transition: background-color 0.2s;
+}
+
+.btn-guardar:hover {
+    background-color: #512da8; /* Tono más oscuro de tu color */
 } 

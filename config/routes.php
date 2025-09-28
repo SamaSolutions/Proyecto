@@ -28,8 +28,8 @@ $router->addRoute("GET", "/servicios", "ExplorarController@mostrarCategoria");
 // Rutas protegidas por middleware de autenticación
 $router->addRoute("GET", "/dashboard", "DashboardController@index", [AuthMiddleware::class]);
 $router->addRoute("GET", "/dashboard/:id", "DashboardController@show", [AuthMiddleware::class]);
-$router->addRoute("GET", "/profile", "ProfileController@index", [AuthMiddleware::class]);
-$router->addRoute("POST", "/profile", "ProfileController@update", [AuthMiddleware::class]);
+$router->addRoute("GET", "/perfil", "DashboardController@mostrarPerfil", [AuthMiddleware::class]);
+$router->addRoute("POST", "/perfil", "DashboardController@cambiarPerfil", [AuthMiddleware::class]);
 $router->addRoute("GET", "/publicarServicios", "PublicarServiciosController@index", [AuthMiddleware::class]);
 $router->addRoute("POST", "/publicarServicios", "PublicarServiciosController@publicar", [AuthMiddleware::class]);
 

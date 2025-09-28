@@ -1,4 +1,7 @@
-<?php header("Location: /home");
-exit;
+<?php
+ if(!$rutAdmin){
+  header("Location: /home");
+  exit;
+ } 
 ?>
 
