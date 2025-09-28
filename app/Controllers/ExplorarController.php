@@ -23,8 +23,20 @@ parent::__construct();
  }
 
  public function mostrarCategoria(){
-  $servicios = $this->modelo->findByCategoria($_GET['categoria']);
-  return $this->render("explorar/servicios", ["servicios" => $servicios]);
+  $categoria=$_GET['categoria'] ?? '';
+  $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+  $pagina = max(1, $pagina);
+  $serviciosPorPagina = 5;
+  $servicios = $this->modelo->findByCategoria($categoria, $pagina, $serviciosPorPagina);
+  $totalServicios = $this->modelo->countByCategoria($categoria);
+  $totalPaginas = ceil($totalServicios / $serviciosPorPagina);
+  return $this->render("explorar/servicios", [
+   "servicios" => $servicios,
+   "pagina" => $pagina,
+   "totalPaginas" => $totalPaginas,
+   "categoria" => $categoria
+   
+  ]);
  }
 }
 

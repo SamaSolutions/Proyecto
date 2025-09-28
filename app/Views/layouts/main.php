@@ -16,8 +16,8 @@
         <?php $this->component('flash-messages') ?>
 		<?= $content ?>
         </main>
-     <footer>
-      
+     <footer class="footer">
+      <?php $this->component('footer') ?>
      </footer>
 </body>
 </html>

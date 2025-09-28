@@ -20,15 +20,17 @@ class PublicarServiciosController extends Controller{
     
     public function publicar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $rutVendedor = $_SESSION['rut']; 
+         $user=$this->session->get("user");
+            $rutVendedor = $user["rut"]; 
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $precio = $_POST['precio'];
             $duracion = $_POST['duracion'];
             $categoria = $_POST['categoria'];
-
-            $this->model->crearServicio($rut, $nombre, $descripcion, $precio, $duracion, $categoria);
-            $mensaje = "¡Servicio publicado correctamente!";
+        
+            $this->modelo->crearServicio($rutVendedor, $nombre, $descripcion, $precio, $duracion, $categoria);
+            echo "¡Servicio publicado correctamente!";
+            $this->redirect("/publicarServicios");
         }
     }
 }

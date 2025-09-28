@@ -614,4 +614,92 @@
     background: #f5f5f5;
     color: #999;
     cursor: not-allowed;
-}           
+}          
+
+.footer {
+    background: #673ab7;
+    color: #fff;
+    padding: 25px 0;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-mensaje {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.footer-correo {
+    font-weight: 600;
+    color: #ffeb3b; /* Amarillo para resaltar el email */
+}
+
+.footer-directo {
+    margin: 10px 0;
+    font-size: 0.95rem;
+}
+
+.footer-directo a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.footer-directo a:hover {
+    opacity: 0.8;
+}
+
+.footer-copy {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #ddd;
+}
+
+/* Estilos para el contenedor de paginación */
+.paginacion-servicios {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px 0;
+}
+
+/* Estilos para cada enlace */
+.paginacion-link {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #e0e0e0; /* Gris muy claro para minimalismo */
+    border-radius: 4px;
+    text-decoration: none;
+    color: #424242; /* Texto oscuro para buena legibilidad */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Estilo al pasar el ratón (Hover) */
+.paginacion-link:hover {
+    background-color: #f5f5f5; /* Fondo ligeramente gris */
+    border-color: #673ab7; /* Borde al color principal */
+    color: #333;
+}
+
+/* Estilo para la página actual (ACTIVO) */
+.paginacion-link.activo {
+    background-color: #673ab7; /* Color principal */
+    color: white; /* Texto blanco */
+    border-color: #673ab7;
+    font-weight: 500; /* Ligeramente más grueso */
+    pointer-events: none; /* Evita que sea clickable */
+}
+
+/* Estilos para los enlaces anterior/siguiente */
+.paginacion-link:first-child,
+.paginacion-link:last-child {
+    min-width: 80px;
+} 
