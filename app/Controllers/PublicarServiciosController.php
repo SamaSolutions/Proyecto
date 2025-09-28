@@ -3,7 +3,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\PublicaServicios;
 
-class ServicioController {
+class PublicarServiciosController extends Controller{
     private $modelo;
 
     public function __construct() {
@@ -20,14 +20,14 @@ class ServicioController {
     
     public function publicar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $rutVendedor = $_SESSION['rutUsuario']; 
+            $rutVendedor = $_SESSION['rut']; 
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $precio = $_POST['precio'];
             $duracion = $_POST['duracion'];
             $categoria = $_POST['categoria'];
 
-            $this->model->crearServicio($rutVendedor, $nombre, $descripcion, $precio, $duracion, $categoria);
+            $this->model->crearServicio($rut, $nombre, $descripcion, $precio, $duracion, $categoria);
             $mensaje = "¡Servicio publicado correctamente!";
         }
     }
