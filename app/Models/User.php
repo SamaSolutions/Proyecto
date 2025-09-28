@@ -114,15 +114,7 @@ class User extends Model {
     
     }
    
-   /**
- * Actualiza los campos de perfil en la tabla Usuarios.
- * @param string $rut El RUT del usuario a actualizar.
- * @param array $data Los datos a actualizar.
- * @return bool Retorna verdadero si la actualización fue exitosa.
- */
-public function actualizarDatosPerfil($rut, $data) {
-    // 1. Define la consulta SQL UPDATE
-    // Usamos marcadores de posición (?) para todos los valores, incluyendo el RUT.
+  public function actualizarDatosPerfil($rut, $data) {
     $this->db->query("
         UPDATE Usuarios 
         SET 
@@ -138,5 +130,80 @@ public function actualizarDatosPerfil($rut, $data) {
         $rut
     ]);
 
- }    
-}
+ }
+  
+  public function findAllUsersWithDetails()
+    {
+        $sql = "
+            SELECT 
+                p.rut, p.nombre, p.apellido, p.email, p.localidad, p.nro, p.calle,
+                u.descripcion_del_perfil, u.especialidad, u.experiencia, u.disponibilidad
+            FROM 
+                Personas p
+            LEFT JOIN 
+                Usuarios u ON p.rut = u.rutUsuario
+            WHERE 
+                p.rut NOT IN (SELECT rutAdmin FROM Admin)
+            ORDER BY 
+                p.rut DESC
+        ";
+        try {
+            return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            error_log("Error al obtener usuarios: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function updateUser($rut, $personaData, $usuarioData) {
+        $this->db->beginTransaction();
+        try {
+            $this->db->query("UPDATE Personas SET nombre=?, apellido=?, email=?, nro=?, calle=?, localidad=? 
+                           WHERE rut=?", [
+                           $personaData['nombre'], 
+                           $personaData['apellido'], 
+                           $personaData['email'], 
+                           $personaData['nro'],
+                           $personaData['calle'], 
+                           $personaData['localidad'], 
+                           $rut
+            ]);
+            
+            
+            $this->db->query("UPDATE Usuarios SET descripcion_del_perfil=?, especialidad=?, experiencia=?, disponibilidad=? 
+                              WHERE rutUsuario=?",[
+                              $usuarioData['descripcion_del_perfil'],
+                              $usuarioData['especialidad'],
+                              $usuarioData['experiencia'], 
+                              $usuarioData['disponibilidad'],
+                              $rut
+            ]);
+
+            $this->db->commit();
+            return true;
+        } catch (\PDOException $e) {
+            $this->db->rollBack();
+            error_log("Error actualizando usuario: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function deleteUser($rut)
+    {
+        $this->db->beginTransaction();
+        try {
+            $this->db->query("DELETE FROM Contraseñas WHERE rutPersona = ?", [$rut]);
+            $this->db->query("DELETE FROM Valoraciones WHERE rutUsuario = ?", [$rut]);
+            $this->db->query("DELETE FROM Usuarios WHERE rutUsuario = ?", [$rut]);
+            $this->db->query("DELETE FROM Personas WHERE rut = ?", [$rut]);
+
+            $this->db->commit();
+            return true;
+        } catch (\PDOException $e) {
+            $this->db->rollBack();
+            error_log("Error eliminando usuario: " . $e->getMessage());
+            return false;
+        }
+    }
+}    
+
