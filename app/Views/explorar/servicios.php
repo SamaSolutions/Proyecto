@@ -1,3 +1,4 @@
+<?php if(!empty($servicios)): ?>
 <h1>Lista de Servicios</h1>
 
   <?php foreach($servicios as $servicio): ?>
@@ -38,3 +39,6 @@
 
     <?php endif; ?>
 </div>
+<?php else: ?>
+<h1><span>No hay servicios aun para esta <a href="/explorar">categoria</a>.<span></h1>
+<?php endif; ?>
