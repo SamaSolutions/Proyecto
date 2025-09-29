@@ -38,4 +38,24 @@ class Database {
     public function lastInsertId() {
         return $this->connection->lastInsertId();
     }
+    
+     public function beginTransaction() {
+        return $this->connection->beginTransaction();
+    }
+
+    /**
+     * Confirma una transacción.
+     * @return bool
+     */
+    public function commit() {
+        return $this->connection->commit();
+    }
+
+    /**
+     * Revierte una transacción.
+     * @return bool
+     */
+    public function rollBack() {
+        return $this->connection->rollBack();
+    }
 }

@@ -7,7 +7,7 @@ class DashboardController extends Controller {
     public function index() {
         $datos=$this->session->get("user");
         $userModel = new \App\Models\User();
-        $rutAdmin = $userModel->findAdmin($datos["rut"]); 
+        $rutAdmin = $userModel->findAdmin($datos["rut"]);
         return $this->render('dashboard/index', [
             'title' => 'Dashboard',
             'user' => $this->auth->user(),
@@ -87,27 +87,36 @@ class DashboardController extends Controller {
 
     }
     
-    public function adminUsuarios()
-    {
-        $userModel = new \App\Models\User(); 
+    public function adminUsuarios() {
+       
+       $datos=$this->session->get("user");
+        $userModel = new \App\Models\User();
+        $rutAdmin = $userModel->findAdmin($datos["rut"]);
+
         
+       if($rutAdmin){
         $usuarios = $userModel->findAllUsersWithDetails();
-        
         $mensaje = $_SESSION['admin_mensaje'] ?? null;
         unset($_SESSION['admin_mensaje']);
         
-        return $this->render('dashboard/admin_usuarios', [
+        return $this->render('dashboard/admin', [
             'usuarios' => $usuarios,
             'mensaje' => $mensaje 
         ]);
+       }else{
+        $this->session->flash("Error", "Debes ser administrador para ingresar aqui.");
+        header("location: /home");
+        exit;
+       }
+       
     }
 
     public function modificarUsuario($params)
     {
-        $rut = $params[0] ?? null;
+        $rut = $params['rut'] ?? null;
         
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($rut)) {
-            header("Location: /admin/usuarios");
+            header("Location: /admin");
             exit;
         }
 
@@ -135,17 +144,17 @@ class DashboardController extends Controller {
             $_SESSION['admin_mensaje'] = ['tipo' => 'error', 'texto' => "Error al modificar el usuario $rut."];
         }
 
-        header("Location: /admin/usuarios");
+        header("Location: /admin");
         exit;
     }
     
     public function eliminarUsuario($params){
         
-        $rut = $params[0] ?? null;
+        $rut = $params['rut'] ?? null;
         
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($rut)) {
             $_SESSION['admin_mensaje'] = ['tipo' => 'error', 'texto' => "Acceso inválido o RUT no especificado."];
-            header("Location: /admin/usuarios");
+            header("Location: /admin");
             exit;
         }
         
@@ -157,7 +166,7 @@ class DashboardController extends Controller {
             $_SESSION['admin_mensaje'] = ['tipo' => 'error', 'texto' => "Error al intentar eliminar el usuario $rut."];
         }
 
-        header("Location: /admin/usuarios");
+        header("Location: /admin");
         exit;
     }
 }    

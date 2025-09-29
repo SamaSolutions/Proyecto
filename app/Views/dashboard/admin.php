@@ -40,7 +40,7 @@
                         
                         <!-- Formulario para Eliminar -->
                         <form id="delete-form-<?= $usuario['rut'] ?>" 
-                              action="/admin/usuarios/eliminar/<?= $usuario['rut'] ?>" 
+                              action="/admin/eliminar/<?= $usuario['rut'] ?>" 
                               method="POST" 
                               style="display:inline-block;">
                             <button type="button" 
@@ -99,5 +99,6 @@
     </div>
 </div>
 
-<!-- Referencia al JavaScript. Asegúrate de que la ruta sea correcta. -->
-<script src="/js/admin_usuarios.js"></script>
+<script src="/js/admin.js"></script>
+
+

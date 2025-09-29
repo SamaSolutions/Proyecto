@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Actualiza el título del modal y la acción del formulario
                 document.getElementById('editRutDisplay').textContent = user.rut;
-                form.action = '/admin/usuarios/modificar/' + user.rut;
+                form.action = '/admin/modificar/' + user.rut;
 
                 // Muestra el modal
                 modal.style.display = 'flex';

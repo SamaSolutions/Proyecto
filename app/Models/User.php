@@ -100,10 +100,9 @@ class User extends Model {
         );
 
         $this->db->query(
-            "INSERT INTO Usuarios (rutUsuario, descripcion_del_perfil, especialidad, experiencia, disponibilidad, razon_social) VALUES (?,?,?,?,?,?)",
+            "INSERT INTO Usuarios (rutUsuario, descripcion_del_perfil, especialidad, experiencia, disponibilidad) VALUES (?,?,?,?,?)",
             [
                 $data['rut'],
-                '',
                 '',
                 '',
                 '',
@@ -156,8 +155,8 @@ class User extends Model {
     }
 
     public function updateUser($rut, $personaData, $usuarioData) {
-        $this->db->beginTransaction();
-        try {
+         $this->db->beginTransaction();    
+         try {
             $this->db->query("UPDATE Personas SET nombre=?, apellido=?, email=?, nro=?, calle=?, localidad=? 
                            WHERE rut=?", [
                            $personaData['nombre'], 
@@ -182,28 +181,36 @@ class User extends Model {
             $this->db->commit();
             return true;
         } catch (\PDOException $e) {
-            $this->db->rollBack();
+            $this->db->rollBack();    
             error_log("Error actualizando usuario: " . $e->getMessage());
             return false;
         }
     }
 
     public function deleteUser($rut)
-    {
+{
+    try {
         $this->db->beginTransaction();
-        try {
-            $this->db->query("DELETE FROM Contraseñas WHERE rutPersona = ?", [$rut]);
-            $this->db->query("DELETE FROM Valoraciones WHERE rutUsuario = ?", [$rut]);
-            $this->db->query("DELETE FROM Usuarios WHERE rutUsuario = ?", [$rut]);
-            $this->db->query("DELETE FROM Personas WHERE rut = ?", [$rut]);
 
-            $this->db->commit();
-            return true;
-        } catch (\PDOException $e) {
-            $this->db->rollBack();
-            error_log("Error eliminando usuario: " . $e->getMessage());
-            return false;
-        }
+        $this->db->query("DELETE FROM ofrecen WHERE rutUVendedor = ?", [$rut]); 
+        
+        $this->db->query("DELETE FROM Personas_Telefonos WHERE rutPersona = ?", [$rut]);
+        
+        $this->db->query("DELETE FROM Contraseñas WHERE rutPersona = ?", [$rut]);
+        $this->db->query("DELETE FROM Valoraciones WHERE rutUsuario = ?", [$rut]);
+
+        $this->db->query("DELETE FROM Usuarios WHERE rutUsuario = ?", [$rut]);
+        $this->db->query("DELETE FROM Personas WHERE rut = ?", [$rut]);
+
+        $this->db->commit();
+        return true;
+    } catch (\PDOException $e) {
+        
+        $this->db->rollBack();
+        
+        error_log("Error eliminando usuario (Final): " . $e->getMessage()); 
+        return false;
     }
+}
 }    
 
