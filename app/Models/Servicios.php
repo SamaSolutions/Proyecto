@@ -8,6 +8,60 @@ class Servicios extends Model {
     protected $table = 'Servicios';
         protected $primaryKey='idServicio';
     
+
+   public function borrarServicio($idServicio, $rutUsuario) {
+    $query = $this->db->query(
+        "SELECT COUNT(*) FROM ofrecen WHERE IdServicio = ? AND rutUVendedor = ?",
+        [$idServicio, $rutUsuario]
+    );
+
+    if ($query->fetchColumn() == 0) {
+        return false;
+    }
+
+
+    $this->db->query("DELETE FROM pertenecen WHERE IdServicio = ?", [$idServicio]);
+
+    $this->db->query("DELETE FROM ofrecen WHERE IdServicio = ?", [$idServicio]);
+    $query = $this->db->query("DELETE FROM Servicios WHERE IdServicio = ?", [$idServicio]);
+    
+    return $query->rowCount() > 0;
+}
+     
+ public function findByRut($rut, $pagina = 1, $offset = 5){
+    $inicio = ($pagina - 1) * $offset;
+    
+    $query = $this->db->query("
+        SELECT 
+            S.IdServicio, 
+            S.nombre, 
+            S.descripcion, 
+            S.precio_estimado AS precio, 
+            S.duracion
+        FROM
+            Servicios AS S
+        INNER JOIN
+            ofrecen AS O ON S.IdServicio = O.IdServicio
+        WHERE
+            O.rutUVendedor = ? 
+        LIMIT $inicio, $offset", 
+        [$rut]
+    );
+    return $query->fetchAll(\PDO::FETCH_ASSOC); 
+}
+
+public function countByRut($rut) {
+    $query = $this->db->query(
+        "SELECT COUNT(S.IdServicio)
+        FROM Servicios AS S
+        INNER JOIN ofrecen AS O ON S.IdServicio = O.IdServicio
+        WHERE O.rutUVendedor = ?",
+        [$rut]
+    );
+    return $query->fetchColumn(); 
+}
+ 
+    
     public function findByCategoria($categoria, $pagina = 1, $offset = 5){
     $inicio = ($pagina - 1) * $offset;
     $query = $this->db->query("
@@ -46,4 +100,45 @@ class Servicios extends Model {
      $query = $this->db->query("SELECT * from Categorias");
     return $query->fetchAll();
     }
+  
+public function findById($idServicio) {
+    $query = $this->db->query(
+        "SELECT 
+            S.IdServicio, 
+            S.nombre, 
+            S.descripcion, 
+            S.precio_estimado AS precio, 
+            S.duracion,
+            O.rutUVendedor AS rutPropietario 
+        FROM Servicios AS S 
+        INNER JOIN ofrecen AS O ON S.IdServicio = O.IdServicio 
+        WHERE S.IdServicio = ? LIMIT 1",
+        [$idServicio]
+    );
+    return $query->fetch(); 
+ }
+ 
+
+public function actualizarServicio($idServicio, $datos) {
+    
+    $query = $this->db->query("
+        UPDATE Servicios 
+        SET 
+            nombre = ?, 
+            descripcion = ?, 
+            precio_estimado = ?, 
+            duracion = ?
+        WHERE IdServicio = ?",
+        [
+            $datos['nombre'],
+            $datos['descripcion'],
+            $datos['precio_estimado'], 
+            $datos['duracion'],
+            $idServicio
+        ]
+    );
+    return $query->rowCount() > 0;
 }
+}
+
+

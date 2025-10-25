@@ -29,8 +29,8 @@ class PublicarServiciosController extends Controller{
             $categoria = $_POST['categoria'];
         
             $this->modelo->crearServicio($rutVendedor, $nombre, $descripcion, $precio, $duracion, $categoria);
-            echo "¡Servicio publicado correctamente!";
-            $this->redirect("/publicarServicios");
+            $this->session->flash("success", "¡Servicio publicado correctamente!");
+            $this->redirect("publicaServicios");
         }
     }
 }

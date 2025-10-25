@@ -35,4 +35,7 @@ $router->addRoute("GET", "/perfil", "DashboardController@mostrarPerfil", [AuthMi
 $router->addRoute("POST", "/perfil", "DashboardController@cambiarPerfil", [AuthMiddleware::class]);
 $router->addRoute("GET", "/publicarServicios", "PublicarServiciosController@index", [AuthMiddleware::class]);
 $router->addRoute("POST", "/publicarServicios", "PublicarServiciosController@publicar", [AuthMiddleware::class]);
-
+$router->addRoute("GET", "/miServicios", "ServiciosController@index", [AuthMiddleware::class]);
+$router->addRoute("POST", "/miServicios/eliminar/:id", "ServiciosController@eliminar", [AuthMiddleware::class]);
+$router->addRoute("GET", "/miServicios/editar/:id", "ServiciosController@editar", [AuthMiddleware::class]); 
+$router->addRoute("POST", "/miServicios/actualizar/:id", "ServiciosController@actualizar", [AuthMiddleware::class]);

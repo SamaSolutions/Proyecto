@@ -26,8 +26,13 @@
        
      <div id="perfilDropdownMenu" class="dropdown-menu">
         <a href="/perfil" class="dropdown-item">Mi Perfil</a>
+        <?php
+         $user=$auth['user']; 
+         if ($user['rutAdmin']): ?>
          <a href="/admin" class="dropdown-item">Administrar</a> 
-        <a href="/logout" class="dropdown-item">Salir (Logout)</a>
+        <?php endif; ?>
+         <a href="/miServicios" class="dropdown-item">Mis Servicios</a>
+         <a href="/logout" class="dropdown-item">Salir (Logout)</a>
     </div> 
 </div> 
    <script src="/js/perfil.js"></script>   

@@ -40,6 +40,7 @@ class Auth {
      */
     public function attempt($email, $password) {
         $user = $this->userModel->findByEmail($email);
+        $user["rutAdmin"]=$this->userModel->findAdmin($user['rut'])?? '';
         if ($user && password_verify($password, $user['password_hash'])) {
             // No almacenar la contraseña en la sesión
             unset($user["password_hash"]);
@@ -81,6 +82,7 @@ class Auth {
     public function check() {
         return $this->session->has("user");
     }
+    
 
     /**
      * Cierra la sesión del usuario
