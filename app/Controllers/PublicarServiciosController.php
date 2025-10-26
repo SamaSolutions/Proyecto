@@ -30,7 +30,7 @@ class PublicarServiciosController extends Controller{
         
             $this->modelo->crearServicio($rutVendedor, $nombre, $descripcion, $precio, $duracion, $categoria);
             $this->session->flash("success", "¡Servicio publicado correctamente!");
-            $this->redirect("publicaServicios");
+            $this->redirect("publicarServicios");
         }
     }
 }

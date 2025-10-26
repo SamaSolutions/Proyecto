@@ -1118,3 +1118,205 @@
 .btn-secondary:hover {
     background-color: #5a6268;
 }
+
+/*
+  CSS para la vista de contacto (fragmento).
+  Se utilizan selectores de clases únicas (terminadas en -unica) como solicitado.
+*/
+
+:root {
+    --color-fondo-seccion: #ffffff; /* Fondo blanco para la sección */
+    --color-principal: #3498db; 
+    --color-texto: #333;
+    --color-sombra: rgba(0, 0, 0, 0.1);
+    --color-gmail: #dd4b39;
+    --color-instagram: #c13584;
+    --borde-radio: 10px;
+}
+
+/* Contenedor principal del fragmento de contacto */
+.seccion-contacto-unica {
+    padding: 30px 20px;
+    margin: 20px auto;
+    max-width: 1000px;
+    text-align: center;
+    background-color: var(--color-fondo-seccion);
+    border-radius: var(--borde-radio);
+    box-shadow: 0 5px 15px var(--color-sombra);
+}
+
+.titulo-contacto-unica {
+    color: var(--color-principal);
+    font-size: 2.2em;
+    margin-bottom: 5px;
+}
+
+.subtitulo-contacto-unica {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+/* Contenedor de los dos bloques (para el layout de rejilla) */
+.contenedor-bloques-unica {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; 
+}
+
+/* Estilos de cada bloque de contacto (el cuadrado) */
+.bloque-contacto-unica {
+    /* El "cuadrado" de contacto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%; 
+    max-width: 400px; /* Tamaño del cuadrado */
+    height: 350px; 
+    padding: 20px;
+    border-radius: var(--borde-radio);
+    box-shadow: 0 5px 15px var(--color-sombra);
+    text-decoration: none; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+}
+
+.bloque-contacto-unica:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo específico para el bloque de Gmail */
+.bloque-gmail-unica {
+    border: 3px solid var(--color-gmail);
+    color: var(--color-gmail);
+}
+
+/* Estilo específico para el bloque de Instagram */
+.bloque-instagram-unica {
+    border: 3px solid var(--color-instagram);
+    color: var(--color-instagram);
+}
+
+/* Envoltorio del icono */
+.icono-envoltorio-unica {
+    width: 200px; 
+    height: 200px;
+    margin-bottom: 25px;
+}
+
+/* Estilo de la etiqueta SVG (el icono) */
+.icono-svg-unica {
+    width: 100%;
+    height: 100%;
+    fill: currentColor; /* Hereda el color del bloque padre */
+}
+
+.texto-contacto-unica {
+    font-size: 1.5em;
+    font-weight: bold;
+    word-break: break-word;
+    padding: 0 10px;
+}
+
+.imagen-icono-unica {
+ width:100%;
+ height: 100%;
+ object-fit:contain;
+}
+
+/*
+=============================================
+ ESTILOS PARA LA SECCIÓN "ACERCA DE NOSOTROS"
+=============================================
+*/
+
+/* Contenedor principal del desplegable */
+.lore-proyecto-unica {
+    margin-top: 40px; /* Separación de los bloques de contacto de arriba */
+    width: 100%;
+    /* Limitamos el ancho para que coincida con el ancho total de los bloques */
+    max-width: 830px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* El botón (etiqueta <summary>) */
+.lore-boton-unica {
+    display: inline-block; /* Permite centrarlo y darle estilos de bloque */
+    background-color: var(--color-principal); /* Reutilizamos el azul principal */
+    color: white;
+    padding: 12px 30px;
+    border-radius: var(--borde-radio);
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+    /* Oculta la flecha/triángulo por defecto del <details> */
+    list-style: none; 
+}
+
+/* Oculta la flecha en navegadores WebKit (Chrome, Safari) */
+.lore-boton-unica::-webkit-details-marker {
+    display: none;
+}
+
+.lore-boton-unica:hover {
+    background-color: #2980b9; /* Un tono de azul más oscuro al pasar el ratón */
+}
+
+/* El contenido del Lore (lo que se despliega) */
+.lore-contenido-unica {
+    margin-top: 20px; /* Espacio entre el botón y el texto */
+    padding: 25px;
+    background-color: #f9f9f9; /* Un fondo gris muy claro */
+    border-radius: var(--borde-radio);
+    border: 2px solid #e0e0e0;
+    text-align: left; /* Alineamos el texto del lore a la izquierda para mejor lectura */
+    line-height: 1.7;
+    color: var(--color-texto);
+    
+    /* Animación suave al abrir/cerrar (opcional pero recomendado) */
+    opacity: 1;
+    max-height: 1000px; /* Un valor alto para permitir el contenido */
+    transition: all 0.5s ease-in-out;
+}
+
+/* Estilos para el <details> cuando está cerrado */
+.lore-proyecto-unica:not([open]) .lore-contenido-unica {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+
+/* Estilos para los párrafos dentro del contenido */
+.lore-contenido-unica p {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* ESTA ES LA PARTE QUE PROBABLEMENTE FALTABA */
+/* Estilos para el texto en negrita (<strong>) */
+.lore-contenido-unica p strong {
+    color: var(--color-principal); /* Resalta el título "El Lore..." en azul */
+    font-weight: 700;
+}
+
+/* Quitar el margen del último párrafo */
+.lore-contenido-unica p:last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 850px) {
+    .bloque-contacto-unica {
+        width: calc(50% - 30px); /* Dos columnas */
+    }
+}

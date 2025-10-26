@@ -15,9 +15,7 @@ $router->addRoute("POST", "/login", "AuthController@login");
 $router->addRoute("GET", "/logout", "AuthController@logout");
 $router->addRoute("GET", "/register", "AuthController@showRegister");
 $router->addRoute("POST", "/register", "AuthController@register");
-$router->addRoute("GET", "/registerProveedor", "AuthController@showRegisterProveedor");
-$router->addRoute("POST", "/registerProveedor", "AuthController@registerProveedor");
-
+$router->addRoute("GET", "/contacto", "ContactoController@index");
 
 $router->addRoute("GET", "/minuevo", "MinuevoController@index");
 $router->addRoute("GET", "/minv/id/:id", "MinuevoController@index");
