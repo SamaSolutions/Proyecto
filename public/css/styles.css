@@ -116,17 +116,6 @@
      height: auto;
     }
 
-   @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .imagen img {
-     max-width: 100%;
-    }
-   }
-   
    .seccion-explorar {
     margin-top: 60px;
     padding: 40px 20px;
@@ -1315,8 +1304,207 @@
     margin-bottom: 0;
 }
 
-@media (min-width: 850px) {
-    .bloque-contacto-unica {
-        width: calc(50% - 30px); /* Dos columnas */
+ /*
+==================================================
+        ADAPTACIÓN A MÓVILES (MÁX. 768PX)
+==================================================
+*/
+@media (max-width: 768px) {
+    /* Base para contenedores */
+    .container {
+        width: 95%; /* Más ancho en móviles */
+        padding: 10px;
     }
-}
+
+    /* --- NAVEGACIÓN --- */
+    .navbar {
+        flex-direction: column; /* Apila logo y menú */
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .menu {
+        flex-direction: column; /* Apila los enlaces verticalmente */
+        width: 100%;
+        gap: 0;
+        margin-top: 10px;
+        /* NOTA: En un sitio real, usarías JS para mostrar/ocultar el menú */
+        display: none; /* Oculto por defecto para menú hamburguesa */
+    }
+
+    .menu li {
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        border-top: 1px solid #eee;
+    }
+
+    .auth {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .auth a {
+        display: block; /* Ocupa todo el ancho */
+        padding: 0.75rem;
+    }
+
+    /* Dropdown de perfil ajustado */
+    .dropdown-perfil {
+        width: 100%;
+    }
+    .dropdown-toggle {
+        justify-content: center;
+        width: 100%;
+    }
+    .dropdown-menu {
+        min-width: 100%;
+    }
+
+    /* --- HERO SECTION (container2) --- */
+    .container2 {
+        flex-direction: column-reverse; /* Pone la imagen debajo del texto */
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    .contenido {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .contenido h1 {
+        font-size: 2.2rem; /* Reduce el tamaño del título */
+    }
+
+    .contenido p {
+        font-size: 1rem; /* Reduce el tamaño del párrafo */
+    }
+
+    .imagen {
+        width: 100%;
+        order: 1; /* Asegura que la imagen vaya antes del texto si se usa flex-direction: column; */
+    }
+
+    .imagen img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .boton-tuservicio{
+        width: 100%;
+    }
+
+    /* --- SECCIÓN EXPLORAR --- */
+    .mensaje-explorar {
+        font-size: 1.2rem;
+    }
+    
+    /* --- LISTADO DE SERVICIOS --- */
+    .servicio:hover {
+        /* Reduce un poco el efecto de hover en móvil */
+        transform: scale(1.02);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* --- LOGIN / REGISTRO --- */
+    .login-container, 
+    .register-container {
+        flex-direction: column; /* Apila imagen y formulario */
+        margin: 20px auto;
+        box-shadow: none; /* Quita la sombra en móvil */
+        height: auto;
+    }
+
+    .login-image, 
+    .register-image {
+        display: none; /* Oculta la imagen grande de los formularios */
+    }
+
+    .login-form, 
+    .register-form {
+        padding: 20px;
+        width: 100%;
+        max-height: none; /* Permite que el formulario de registro crezca */
+        overflow-y: visible;
+    }
+
+    /* --- FORMULARIOS GENÉRICOS --- */
+    .form-publicar-servicio,
+    .perfil-container,
+    .editar-servicio-page {
+        padding: 15px;
+        margin: 20px auto;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 100%;
+    }
+    
+    /* --- PERFIL Y ADMIN --- */
+    .user-table {
+        display: block; /* Hace que la tabla se comporte como un bloque */
+        overflow-x: auto; /* Permite el scroll horizontal en tablas */
+        white-space: nowrap;
+        width: 100%;
+    }
+    .user-table thead, .user-table tbody, .user-table th, .user-table td, .user-table tr {
+        display: block; /* Puede requerir ajustes específicos si la tabla se rompe */
+    }
+    .user-table th, .user-table td {
+        white-space: normal;
+    }
+    .admin-container {
+        padding: 10px;
+    }
+
+    /* --- MIS SERVICIOS --- */
+    .servicios-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+
+    .tarjeta-servicio-mis-servicios:hover {
+        transform: translateY(-3px);
+    }
+    
+    .acciones-servicio {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .btn {
+        flex-grow: 1; /* Hace que los botones se expandan */
+    }
+
+    /* --- CONTACTO / ACERCA DE --- */
+    .contenedor-bloques-unica {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .bloque-contacto-unica {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .icono-envoltorio-unica {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+
+    .texto-contacto-unica {
+        font-size: 1.2em;
+    }
+    
+    .lore-proyecto-unica {
+        max-width: 100%;
+    }
+    
+    /* --- FOOTER --- */
+    .footer-mensaje {
+        font-size: 1rem;
+     }
+   }
