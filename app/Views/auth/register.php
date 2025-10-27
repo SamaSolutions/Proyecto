@@ -1,38 +1,38 @@
-   <div class="register-container">
+<div class="register-container">
    <div class="register-image">
     <img src="images/register.png">
    </div>
-   
+
    <div class="register-form">
     <h2>Registro de Usuario</h2>
-    
+
     <form method="POST" style="max-width: 400px;">
         <div>
             <label>CI:</label>
-            <input type="text" name="rut" minlength="8" maxlength="8" required value="<?= $this->e($input['rut'] ?? '') ?>">
+            <input type="text" name="rut" minlength="8" maxlength="8" placeholder="Ej: 12345678" required value="<?= $this->e($input['rut'] ?? '') ?>">
         </div>
 
         <div>
             <label>Nombre:</label>
-            <input type="text" name="nombre" minlength="3" maxlength="50" required value="<?= $this->e($input['nombre'] ?? '') ?>">
+            <input type="text" name="nombre" minlength="3" maxlength="100" placeholder="Ej: Juan" required value="<?= $this->e($input['nombre'] ?? '') ?>">
         </div>
-        
+
         <div>
             <label>Apellido:</label>
-            <input type="text" name="apellido" minlength="3" maxlength="50" required value="<?= $this->e($input['apellido'] ?? '') ?>">
+            <input type="text" name="apellido" minlength="3" maxlength="100" placeholder="Ej: Pérez" required value="<?= $this->e($input['apellido'] ?? '') ?>">
         </div>
-       
+
         <div>
             <label>Email:</label>
-            <input type="email" name="email" maxlength="100" required value="<?= $this->e($input['email'] ?? '') ?>">
+            <input type="email" name="email" maxlength="150" placeholder="Ej: correo@ejemplo.com" required value="<?= $this->e($input['email'] ?? '') ?>">
         </div>
 
         <div>
             <label>Telefono:</label>
-            <input type="tel" name="numeroTelefonico" maxlength="20" pattern="(09\d{7}|2\d{7})" required value="<?= $this->e($input['numeroTelefonico'] ?? '') ?>">
+            <input type="tel" name="numeroTelefonico" maxlength="20" pattern="(09\d{7}|2\d{7})" placeholder="Ej: 099123456 o 21234567" required value="<?= $this->e($input['numeroTelefonico'] ?? '') ?>">
         </div>
 
- 
+
         <div>
             <label>Localidad:</label>
             <select name ="localidad" id="localidad" required value="<?= $this->e($input['localidad'] ?? '') ?>">
@@ -69,26 +69,25 @@
 
         <div>
             <label>Calle:</label>
-            <input type="text" name="calle" minlength="3" maxlength="50" required value="<?= $this->e($input['calle'] ?? '') ?>">
+            <input type="text" name="calle" minlength="3" maxlength="100" placeholder="Ej: Av. Principal" required value="<?= $this->e($input['calle'] ?? '') ?>">
         </div>
-    
+
         <div>
             <label>Numero De Puerta:</label>
-            <input type="number" name="numero_puerta" maxlength="11" required value="<?= $this->e($input['numero_puerta'] ?? '') ?>">
+            <input type="text" name="nro" maxlength="50" placeholder="Ej: 1234" required value="<?= $this->e($input['nro'] ?? '') ?>">
         </div>
-       
+
         <div>
             <label>Contraseña:</label>
             <input type="password" name="password" minlength="8" maxlength="64" required>
         </div>
-        
+
         <div>
             <label>Confirmar Contraseña:</label>
-            <input type="password" name="password_confirm" required>
+            <input type="password" name="password_confirm" minlength="8" maxlength="64" required>
         </div>
         <button type="submit">Registrarse</button>
     </form>
     <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
     </div>
    </div>
-   

@@ -12,7 +12,7 @@
             </span>
         </a>
 
-        <a href="https://www.instagram.com/SamaSolutions/" target="_blank" rel="noopener noreferrer" class="bloque-contacto-unica bloque-instagram-unica">
+        <a href="https://www.instagram.com/sama_solutions_oficial?igsh=MXZmdDhvbDlkcTJ2cw==" target="_blank" rel="noopener noreferrer" class="bloque-contacto-unica bloque-instagram-unica">
             <span class="icono-envoltorio-unica">
             <img src="images/ig.png" alt="Logo de Instagram" class="imagen-icono-unica">
             </span>

@@ -111,8 +111,14 @@ class DashboardController extends Controller {
        
     }
 
-    public function modificarUsuario($params)
-    {
+    public function modificarUsuario($params){
+       
+        $datos=$this->session->get("user");
+        $userModel = new \App\Models\User();
+        $rutAdmin = $userModel->findAdmin($datos["rut"]);
+
+
+       if($rutAdmin){
         $rut = $params['rut'] ?? null;
         
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($rut)) {
@@ -147,8 +153,16 @@ class DashboardController extends Controller {
         header("Location: /admin");
         exit;
     }
+  }
     
     public function eliminarUsuario($params){
+        
+        $datos=$this->session->get("user");
+        $userModel = new \App\Models\User();
+        $rutAdmin = $userModel->findAdmin($datos["rut"]);
+
+
+       if($rutAdmin){ 
         
         $rut = $params['rut'] ?? null;
         
@@ -169,5 +183,6 @@ class DashboardController extends Controller {
         header("Location: /admin");
         exit;
     }
+   }
 }    
 

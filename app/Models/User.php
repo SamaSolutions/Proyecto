@@ -187,25 +187,55 @@ class User extends Model {
         }
     }
 
-    public function deleteUser($rut)
+ public function deleteUser($rut)
 {
     try {
         $this->db->beginTransaction();
 
-        $this->db->query("DELETE FROM ofrecen WHERE rutUVendedor = ?", [$rut]); 
         
-        $this->db->query("DELETE FROM Personas_Telefonos WHERE rutPersona = ?", [$rut]);
+        $sqlSelectServices = "
+            SELECT t1.IdServicio
+            FROM ofrecen t1
+            LEFT JOIN ofrecen t2 
+                ON t1.IdServicio = t2.IdServicio AND t2.rutUVendedor != ?
+            WHERE t1.rutUVendedor = ? AND t2.IdServicio IS NULL
+        ";
+        $servicesToDeleteResult = $this->db->query($sqlSelectServices, [$rut, $rut]);
+
+        $serviceIds = [];
+        if ($servicesToDeleteResult) {
+            $rows = $servicesToDeleteResult->fetchAll(); 
+            foreach ($rows as $row) {
+                $serviceIds[] = $row['IdServicio']; 
+            }
+        }
+        $this->db->query("DELETE FROM ofrecen WHERE rutUVendedor = ? OR rutUComprador = ?", [$rut, $rut]);
+
+
+        if (!empty($serviceIds)) {
+            foreach ($serviceIds as $id) {
+                $this->db->query("DELETE FROM pertenecen WHERE IdServicio = ?", [$id]);
+            }
+
+            foreach ($serviceIds as $id) {
+                $this->db->query("DELETE FROM Servicios WHERE IdServicio = ?", [$id]);
+            }
+        }
+        
+
+        $this->db->query("DELETE FROM Valoraciones WHERE rutUsuario = ?", [$rut]);
         
         $this->db->query("DELETE FROM Contraseñas WHERE rutPersona = ?", [$rut]);
-        $this->db->query("DELETE FROM Valoraciones WHERE rutUsuario = ?", [$rut]);
+        $this->db->query("DELETE FROM Personas_Telefonos WHERE rutPersona = ?", [$rut]);
+        $this->db->query("DELETE FROM Admin WHERE rutAdmin = ?", [$rut]);
 
-        $this->db->query("DELETE FROM Usuarios WHERE rutUsuario = ?", [$rut]);
-        $this->db->query("DELETE FROM Personas WHERE rut = ?", [$rut]);
+        $this->db->query("DELETE FROM Usuarios WHERE rutUsuario = ?", [$rut]); 
+        $this->db->query("DELETE FROM Personas WHERE rut = ?", [$rut]);        
 
         $this->db->commit();
         return true;
     } catch (\PDOException $e) {
-        
+
         $this->db->rollBack();
         
         error_log("Error eliminando usuario (Final): " . $e->getMessage()); 
