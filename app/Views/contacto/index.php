@@ -3,7 +3,7 @@
     <p class="subtitulo-contacto-unica">Estamos listos para ayudarte con tus soluciones tecnológicas. Elige cómo prefieres comunicarte:</p>
 
     <div class="contenedor-bloques-unica">
-        <a href="mailto:samasolutions2000@gmail.com" class="bloque-contacto-unica bloque-gmail-unica">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=samasolutions2000@gmail.com&su=Contacto%20desde%20la%20web" target="_blank" class="bloque-contacto-unica bloque-gmail-unica">
             <span class="icono-envoltorio-unica">
             <img src="images/gmail.jpg" alt="Logo de Gmail" class="imagen-icono-unica">
             </span>
