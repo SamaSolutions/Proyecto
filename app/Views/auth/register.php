@@ -74,7 +74,7 @@
 
         <div>
             <label>Numero De Puerta:</label>
-            <input type="text" name="nro" maxlength="50" placeholder="Ej: 1234" required value="<?= $this->e($input['nro'] ?? '') ?>">
+            <input type="text" name="numero_puerta" maxlength="50" placeholder="Ej: 1234" required value="<?= $this->e($input['numero_puerta'] ?? '') ?>">
         </div>
 
         <div>
