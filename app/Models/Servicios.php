@@ -71,7 +71,9 @@ public function countByRut($rut) {
             s.descripcion,
             s.duracion,
             s.nombre AS tipo,
-            c.IdCategoria
+            c.IdCategoria,
+            u.rutUsuario as rutVendedor,
+            s.IdServicio
         FROM Servicios s
         JOIN pertenecen p ON s.IdServicio = p.IdServicio
         JOIN Categorias c ON p.IdCategoria = c.IdCategoria

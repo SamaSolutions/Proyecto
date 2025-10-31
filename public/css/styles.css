@@ -2,8 +2,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1;
-            
         }
         header {
             background-color:white;
@@ -1508,3 +1506,458 @@
         font-size: 1rem;
      }
    }
+
+
+
+/* Estilos Generales del Contenedor */
+.inbox-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Fondo gris muy suave */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.inbox-container h2 {
+    color: #343a40; /* Texto oscuro */
+    border-bottom: 2px solid #e9ecef; /* Separador sutil */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+/* Lista de Conversaciones */
+.lista-conversaciones {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Elemento de Conversación Individual */
+.conversacion-item {
+    margin-bottom: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.conversacion-item a {
+    display: block; /* Hace que todo el <li> sea un área clickable */
+    text-decoration: none;
+    padding: 15px 20px;
+    background-color: #ffffff; /* Fondo blanco para el chat */
+    color: #343a40;
+}
+
+/* Efecto Hover para destacar el chat seleccionado */
+.conversacion-item:hover {
+    transform: translateY(-2px); /* Efecto 3D sutil */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-color: #007bff; /* Color primario azul */
+}
+
+.conversacion-item a:hover {
+    background-color: #eaf4ff; /* Fondo azul muy claro al pasar el ratón */
+}
+
+/* Información del Chat */
+.chat-info {
+    display: flex;
+    justify-content: space-between; /* Alinea el nombre a la izquierda y la fecha a la derecha */
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chat-info strong {
+    font-size: 1.1em;
+    color: #007bff; /* Destacamos el nombre del contacto */
+}
+
+.fecha-ultima-actividad {
+    font-size: 0.8em;
+    color: #6c757d; /* Gris para la hora */
+    white-space: nowrap; /* Evita que la hora se rompa en dos líneas */
+}
+
+.resumen-mensaje {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.9em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es muy largo */
+}
+
+/* Mensaje de no hay conversaciones */
+.inbox-container p {
+    text-align: center;
+    color: #6c757d;
+    padding: 40px 0;
+    border: 1px dashed #ced4da;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.auth {
+    display: flex;
+    align-items: center; /* Centra verticalmente todos los elementos (Campana y Dropdown Perfil) */
+    gap: 15px; /* Espacio entre los elementos */
+}
+
+
+.notification-container {
+    position: relative; /* CLAVE: Sirve como ancla para el menú desplegable */
+    display: flex;
+    align-items: center;
+}
+
+#notification-bell {
+    background: none; /* Elimina fondo */
+    border: none;    /* Elimina borde */
+    cursor: pointer;
+    padding: 0; /* Asegura que el área de clic se ajuste al icono */
+    color: #343a40; 
+    position: relative;
+    transition: color 0.2s;
+}
+
+#notification-bell:hover {
+    color: var(--color-primario, #007bff); /* Color de acción al pasar el ratón */
+}
+
+.bell-icon {
+    font-size: 1.5em; 
+    line-height: 1; /* Ayuda a la alineación vertical */
+}
+
+#unread-count {
+    position: absolute;
+    top: -5px;
+    right: -5px; /* Ajuste para un posicionamiento limpio */
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    line-height: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.notification-dropdown {
+    position: absolute; /* CLAVE: Saca el menú del flujo normal */
+    top: 45px;          /* Lo coloca justo debajo del botón */
+    right: 0;           /* Lo alinea a la derecha (junto al botón Mi Cuenta) */
+    width: 160px;
+    max-height: 100px;
+    overflow-y: auto; /* Scroll si hay demasiadas notificaciones */
+    
+    background-color: #673ab7;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    border-radius: 6px;
+    padding: 0;
+}
+
+#notification-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#notification-list li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #343a40;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+#notification-list li a:hover {
+    background-color: #f8f9fa;
+}
+
+.notificacion-no-leida {
+    font-weight: bold;
+    background-color: #eaf4ff; /* Fondo azul claro para no leídas */
+}
+
+.ver-mas {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 1em;
+    color: #007bff;
+    text-decoration: none;
+    border-top: 1px solid #eee;
+    font-weight: bold;
+}
+
+:root {
+    /* Paleta de colores estilo WhatsApp */
+    --color-fondo-principal: #dad8d8; /* Gris claro para contenedores/input */
+    --color-fondo-chat: #e5ddd5; /* Fondo del área de mensajes */
+    --color-burbuja-enviada: #d9fdd3; /* Verde claro de WhatsApp */
+    --color-burbuja-recibida: #fff; /* Blanco */
+    --color-texto: #111b21;
+    --color-hora: #7a8286;
+    --color-verde-primario: #008069; /* Verde oscuro para cabecera/botones */
+    --color-verde-claro: #1ad35e; /* Para hover/activo */
+    --color-estrella-activa: gold;
+    --color-estrella-inactiva: #ccc;
+}
+
+/* Reset y Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* --- Contenedor Principal (Reemplaza los estilos de Body para centrado) --- */
+.chat-page-layout {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    height: 90vh; /* Alto fijo para que se vea la distribución */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+    background-color: white; /* Fondo base del contenedor */
+    /* Si necesitas que este contenedor se centre en la pantalla, el global 
+       debería tener 'display: flex' y 'justify-content: center' */
+}
+
+/* ---------------------------------------------------- */
+/* --- Sección de Detalles del Servicio (Izquierda) --- */
+/* ---------------------------------------------------- */
+.service-details-panel {
+    width: 30%;
+    min-width: 300px; /* Asegura un ancho mínimo */
+    background-color: var(--color-burbuja-recibida);
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto; 
+    flex-shrink: 0;
+}
+
+.service-details-panel h3, .service-details-panel h4 {
+    color: var(--color-verde-primario);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--color-fondo-principal);
+    padding-bottom: 5px;
+}
+
+.service-details-panel p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    color: var(--color-texto);
+}
+
+.description-text {
+    background-color: var(--color-fondo-principal);
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap; /* Mantiene saltos de línea y formateo */
+}
+
+/* --- Componente de Calificación --- */
+#rating-component {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stars-container {
+    font-size: 30px;
+    cursor: pointer;
+    display: inline-block;
+    direction: rtl; /* Para que la selección de estrellas funcione */
+    unicode-bidi: bidi-override;
+}
+
+.star {
+    display: inline-block;
+    color: var(--color-estrella-inactiva);
+    transition: color 0.2s ease-in-out;
+}
+
+.star:hover,
+.star:hover ~ .star,
+.star.selected,
+.star.selected ~ .star {
+    color: var(--color-estrella-activa);
+}
+
+#submit-rating {
+    background-color: var(--color-verde-primario);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+#submit-rating:hover:not(:disabled) {
+    background-color: var(--color-verde-claro);
+}
+
+#submit-rating:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+/* ------------------------------------------- */
+/* --- Sección Principal de Chat (Derecha) --- */
+/* ------------------------------------------- */
+.chat-main-panel {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-fondo-chat); /* Fondo WhatsApp */
+    flex-grow: 1;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Título Fijo - Cabecera del Chat */
+.chat-container h2 {
+    padding: 15px;
+    background-color: var(--color-verde-primario);
+    color: white;
+    font-size: 1.2em;
+    flex-shrink: 0; /* Evita que el título se encoja */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Caja de Mensajes con Scroll */
+#chat-box {
+    flex-grow: 1; 
+    overflow-y: auto; /* Scroll de mensajes */
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column; 
+    /* Estilo de sombra interna para el scroll (opcional) */
+    box-shadow: inset 0 6px 6px -6px rgba(0, 0, 0, 0.1), inset 0 -6px 6px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de Input Fijo - Pie de Página del Chat */
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background-color: var(--color-fondo-principal);
+    border-top: 1px solid #ccc;
+    flex-shrink: 0; /* Evita que el input se encoja */
+}
+
+#input-mensaje {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none; /* Borde más limpio */
+    border-radius: 20px;
+    font-size: 1em;
+    outline: none;
+    margin-right: 10px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+#boton-enviar {
+    background-color: var(--color-verde-primario);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+#boton-enviar:hover {
+    background-color: var(--color-verde-claro);
+}
+
+/* --------------------------------- */
+/* --- Estilos de las Burbujas --- */
+/* --------------------------------- */
+.mensaje {
+    max-width: 80%;
+    padding: 8px 12px 15px 12px; /* Más padding abajo para la hora */
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    color: var(--color-texto);
+    /* Bloqueo del límite de caracteres para que el mensaje se parta */
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    /* El "pico" de WhatsApp se podría hacer con :after, pero mantendré solo el color para simplificar */
+}
+
+.mensaje.enviado {
+    background-color: var(--color-burbuja-enviada);
+    align-self: flex-end; /* A la derecha */
+    margin-right: 15px; /* Margen para simular el "pico" */
+    border-top-right-radius: 0; /* Opción para un estilo más cuadrado en la esquina */
+}
+
+.mensaje.recibido {
+    background-color: var(--color-burbuja-recibida);
+    align-self: flex-start; /* A la izquierda */
+    margin-left: 15px; /* Margen para simular el "pico" */
+    border-top-left-radius: 0; /* Opción para un estilo más cuadrado en la esquina */
+}
+
+.mensaje strong {
+    font-weight: bold;
+    color: var(--color-verde-primario);
+    margin-right: 5px;
+}
+
+.hora {
+    font-size: 0.6em;
+    color: var(--color-hora);
+    position: absolute;
+    bottom: 2px;
+    right: 5px;
+}
+
+/* -------------------------- */
+/* --- Media Queries (Móvil)--- */
+/* -------------------------- */
+@media (max-width: 768px) {
+    .chat-page-layout {
+        flex-direction: column;
+        height: 100vh; /* Ocupa toda la altura en móvil */
+        width: 100%;
+        max-width: none;
+    }
+
+    .service-details-panel {
+        width: 100%;
+        max-height: 40vh; /* Limita la altura de la información de servicio */
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .chat-main-panel {
+        width: 100%;
+        height: 60vh; /* El resto del espacio para el chat */
+    }
+}

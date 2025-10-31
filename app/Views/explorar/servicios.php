@@ -2,14 +2,47 @@
 <h1>Lista de Servicios</h1>
 
   <?php foreach($servicios as $servicio): ?>
-    <a class="servicio" href="/compra">
+    <form action="/mensajes/iniciar" method="POST" class="servicios-chat-form">
+    <div class="servicio">
       <h3><strong>Categoria:</strong> <?= htmlspecialchars($_GET['categoria']) ?></h3>
       <p><strong>Tipo:</strong> <?= htmlspecialchars($servicio['tipo']) ?></p>
        <p><strong>Descripcion:</strong> <?= htmlspecialchars($servicio['descripcion']) ?></p>
        <p><strong>Duracion:</strong> <?= htmlspecialchars($servicio['duracion']) ?></p>
       <p><strong>Precio Estimado:</strong> <?= number_format($servicio['precio_estimado'], 2, ',', '.') ?></p>
       <p class="razon-social"><strong>Dueño Del Servicio:</strong> <?= htmlspecialchars($servicio['nombre']) ?></p>
-    </a>
+    
+     <input type="hidden" 
+                   name="rutDestinatario" 
+                   value="<?= htmlspecialchars($servicio['rutVendedor']); ?>">
+            
+            <input type="hidden" 
+                   name="idServicio" 
+                   value="<?= htmlspecialchars($servicio['IdServicio']); ?>">
+            
+            <input type="hidden" 
+                   name="categoria" 
+                   value="<?= htmlspecialchars($_GET['categoria']); ?>">
+
+            <input type="hidden" 
+                   name="nombre" 
+                   value="<?= htmlspecialchars($servicio['tipo']); ?>">
+  
+            <input type="hidden" 
+                   name="descripcion" 
+                   value="<?= htmlspecialchars($servicio['descripcion']); ?>">
+
+            <input type="hidden" 
+                   name="precio_estimado" 
+                   value="<?= htmlspecialchars($servicio['precio_estimado']); ?>">
+            
+            <input type="hidden" 
+                   name="razon_social" 
+                   value="<?= htmlspecialchars($servicio['nombre']); ?>"> 
+             
+            <button type="submit" class="btn-iniciar-chat">Contactar</button>
+            
+    </div>
+ </form>
   <?php endforeach; ?> 
 
 <div class="paginacion-servicios">

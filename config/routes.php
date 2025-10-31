@@ -37,3 +37,10 @@ $router->addRoute("GET", "/miServicios", "ServiciosController@index", [AuthMiddl
 $router->addRoute("POST", "/miServicios/eliminar/:id", "ServiciosController@eliminar", [AuthMiddleware::class]);
 $router->addRoute("GET", "/miServicios/editar/:id", "ServiciosController@editar", [AuthMiddleware::class]); 
 $router->addRoute("POST", "/miServicios/actualizar/:id", "ServiciosController@actualizar", [AuthMiddleware::class]);
+$router->addRoute("POST", "/mensajes/iniciar", "MensajesController@iniciar", [AuthMiddleware::class]);
+$router->addRoute("POST", "/mensajes/enviar", "MensajesController@enviar", [AuthMiddleware::class]);
+$router->addRoute("GET", "/mensajes/check", "MensajesController@checkNuevos", [AuthMiddleware::class]);
+$router->addRoute("GET", "/mensajes/chat/:id", "MensajesController@mostrarChat", [AuthMiddleware::class]);
+$router->addRoute("GET", "/mensajes/inbox", "MensajesController@mostrarBandejaEntrada", [AuthMiddleware::class]);
+$router->addRoute("GET", "/api/notificaciones/recientes", "NotificacionController@getRecientes", [AuthMiddleware::class]);
+$router->addRoute("POST", "/api/notificaciones/marcar-leida", "NotificacionController@marcarLeida", [AuthMiddleware::class]);
