@@ -6,17 +6,21 @@ use App\Core\Controller;
 use App\Models\Mensaje;
 use App\Models\Conversacion;
 use App\Models\Notificacion;
+use App\Models\Servicios;
+
 
 class MensajesController extends Controller {
 
     private $modeloMensaje;
     private $modeloConversacion;
     private $modeloNotificacion; 
-    
+    private $modeloServicio; 
+   
     public function __construct() {
         $this->modeloMensaje = new Mensaje();
         $this->modeloConversacion = new Conversacion();
         $this->modeloNotificacion = new Notificacion();
+        $this->modeloServicio = new Servicios();
         parent::__construct();
     }
     
@@ -43,11 +47,11 @@ class MensajesController extends Controller {
 
     // Los datos del servicio vienen del formulario POST al iniciar el chat
     $servitipo=[
-        'nombre' => $_POST['nombre'] ?? '', // Usamos razón_social como el nombre del vendedor
+        'nombre' => $_POST['nombre'] ?? '', 
         'precio' => $_POST['precio_estimado'] ?? 0,
         'categoria' => $_POST['categoria'] ?? 'N/A',
         'descripcion' => $_POST['descripcion'] ?? 'Sin descripción.',
-        'dueño' => $_POST['razon_social'] ?? 'Vendedor' // Nombre para el título del chat
+        'dueño' => $_POST['razon_social'] ?? 'Vendedor' 
     ];
 
     // Lógica para manejar el ID del servicio
@@ -62,15 +66,14 @@ class MensajesController extends Controller {
     if (!$rutUsuario || !$rutDestinatario || $rutUsuario === $rutDestinatario) {
         $this->session->flash('Error', 'Datos de chat incompletos o inválidos.');
         $this->redirect("/explorar");
-        return; // Aseguramos que la ejecución se detenga
+        return; 
     }
 
-    // 3. ENCUENTRA O CREA LA CONVERSACIÓN
+     
     $resultado = $this->modeloConversacion->findOrCreate($rutUsuario, $rutDestinatario, $idServicio);
     $conversacionId = $resultado['id'];
-    $action = $resultado['action'] ?? null; // 'creada' o 'existente'
+    $action = $resultado['action'] ?? null; 
 
-    // 4. LÓGICA DE NOTIFICACIÓN
     if ($action === 'creada') {
         $urlChat = "/mensajes/chat/{$conversacionId}";
         $contenido = "¡Nuevo chat iniciado por {$nombreUsuario}!";
@@ -92,11 +95,10 @@ class MensajesController extends Controller {
             'miRut'             => $rutUsuario,
             'rutDestinatario'   => $rutDestinatario,
             'ultimoId'          => $ultimoId,
-            'servicio'          => $servitipo,      // Contiene nombre, precio, categoría, etc.
+            'servicio'          => $servitipo,    
             'historial'         => $historial
         ];
         
-        // Renderizamos la vista de chat, pasando el array completo
         $this->render("/mensajes/chat", $data);
 
     } else {
@@ -198,7 +200,7 @@ class MensajesController extends Controller {
         if (!$this->modeloConversacion->esParticipante($idConversacion, $rutUsuario)) {
           die('Error: Prohibido. No tienes permiso para ver este chat.');
         }
-        
+        $servicio = $this->modeloServicio->findByIdEspecifica($this->modeloServicio->findByIdConversacion($idConversacion)); 
         $historial = $this->modeloMensaje->getHistorial($idConversacion);
         $ultimoId = empty($historial) ? 0 : end($historial)['id'];
 
@@ -207,7 +209,8 @@ class MensajesController extends Controller {
             "historial" => $historial,
             "conversacion_id" => $idConversacion,
             "ultimoId" => $ultimoId,
-            "miRut" => $rutUsuario
+            "miRut" => $rutUsuario,
+            "servicio" => $servicio
         ]);
     }
     

@@ -8,7 +8,7 @@ class Servicios extends Model {
     protected $table = 'Servicios';
         protected $primaryKey='idServicio';
     
-
+   
    public function borrarServicio($idServicio, $rutUsuario) {
     $query = $this->db->query(
         "SELECT COUNT(*) FROM ofrecen WHERE IdServicio = ? AND rutUVendedor = ?",
@@ -27,7 +27,7 @@ class Servicios extends Model {
     
     return $query->rowCount() > 0;
 }
-     
+  
  public function findByRut($rut, $pagina = 1, $offset = 5){
     $inicio = ($pagina - 1) * $offset;
     
@@ -120,6 +120,34 @@ public function findById($idServicio) {
     return $query->fetch(); 
  }
  
+public function findByIdEspecifica($id) {
+    $query = $this->db->query("
+     SELECT 
+    p.nombre AS dueño,
+    s.nombre,
+    s.descripcion,
+    s.precio_estimado AS precio,
+    s.duracion,
+    c.nombre AS categoria
+ FROM ofrecen o
+ JOIN Usuarios u ON o.rutUVendedor = u.rutUsuario
+ JOIN Personas p ON u.rutUsuario = p.rut
+ JOIN Servicios s ON o.IdServicio = s.IdServicio
+ JOIN pertenecen pe ON s.IdServicio = pe.IdServicio
+ JOIN Categorias c ON pe.IdCategoria = c.IdCategoria
+ WHERE s.IdServicio = ?", [$id]);
+    return $query->fetch();
+ }
+
+public function findByIdConversacion($id){
+   $query= $this->db->query("
+     SELECT idServicio
+     FROM Conversaciones
+     WHERE id=?",[$id]
+   );
+  $resultado = $query->fetch();
+  return $resultado["idServicio"];
+}
 
 public function actualizarServicio($idServicio, $datos) {
     
