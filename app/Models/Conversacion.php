@@ -55,6 +55,25 @@ class Conversacion extends Model {
         return $resultado !== false;
     }
 
+public function getNombreDueño($rutComprador,$id){
+ 
+ $query=$this->db->query("
+   
+  SELECT 
+    CASE
+        WHEN c.rutComprador = ? THEN pV.nombre     
+        ELSE pC.nombre                             
+    END AS dueño
+   FROM Conversaciones c
+   JOIN Usuarios uC ON c.rutComprador = uC.rutUsuario
+   JOIN Personas pC ON uC.rutUsuario = pC.rut
+   JOIN Usuarios uV ON c.rutVendedor = uV.rutUsuario
+   JOIN Personas pV ON uV.rutUsuario = pV.rut
+   WHERE c.id = ?",[$rutComprador, $id]
+ );
+ return $query->fetchColumn();
+}
+
 public function getConversacionesPorRut($rutUsuario) {
     $query = $this->db->query("
         SELECT 

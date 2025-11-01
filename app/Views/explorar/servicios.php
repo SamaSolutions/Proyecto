@@ -38,7 +38,11 @@
             <input type="hidden" 
                    name="razon_social" 
                    value="<?= htmlspecialchars($servicio['nombre']); ?>"> 
-             
+            
+            <input type="hidden" 
+                   name="duracion" 
+                   value="<?= htmlspecialchars($servicio['duracion']); ?>">
+            
             <button type="submit" class="btn-iniciar-chat">Contactar</button>
             
     </div>

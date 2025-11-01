@@ -6,6 +6,7 @@
             <p><strong>Nombre:</strong> <?php echo htmlspecialchars($servicio['nombre'] ?? 'N/A'); ?></p>
             <p><strong>Precio:</strong> $<?php echo number_format($servicio['precio'] ?? 0, 0, ',', '.'); ?></p>
             <p><strong>Categoría:</strong> <?php echo htmlspecialchars($servicio['categoria'] ?? 'N/A'); ?></p>
+            <p><strong>Duración:</strong> <?php echo htmlspecialchars($servicio['duracion'] ?? 'N/A'); ?></p>
             <p><strong>Descripción:</strong></p>
             <p class="description-text"><?php echo nl2br(htmlspecialchars($servicio['descripcion'] ?? 'Sin descripción.')); ?></p>
             

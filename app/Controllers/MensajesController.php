@@ -51,7 +51,8 @@ class MensajesController extends Controller {
         'precio' => $_POST['precio_estimado'] ?? 0,
         'categoria' => $_POST['categoria'] ?? 'N/A',
         'descripcion' => $_POST['descripcion'] ?? 'Sin descripción.',
-        'dueño' => $_POST['razon_social'] ?? 'Vendedor' 
+        'dueño' => $_POST['razon_social'] ?? 'Vendedor',
+        'duracion' => $_POST['duracion'] 
     ];
 
     // Lógica para manejar el ID del servicio
@@ -201,6 +202,7 @@ class MensajesController extends Controller {
           die('Error: Prohibido. No tienes permiso para ver este chat.');
         }
         $servicio = $this->modeloServicio->findByIdEspecifica($this->modeloServicio->findByIdConversacion($idConversacion)); 
+        $servicio["dueño"]=$this->modeloConversacion->getNombreDueño($rutUsuario, $idConversacion);
         $historial = $this->modeloMensaje->getHistorial($idConversacion);
         $ultimoId = empty($historial) ? 0 : end($historial)['id'];
 
