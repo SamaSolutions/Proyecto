@@ -86,33 +86,42 @@ class AuthController extends Controller {
     ]);
 
     if ($password !== $passwordConfirm) {
-        $errors['password_confirm'] = 'Las contraseñas no coinciden';
+        $errors['password_confirm'] = 'Las contraseñas no coinciden.';
     }
 
     $userModel = new \App\Models\User();
-
     if ($userModel->findByRut($rut)) {
-        $errors['rut'] = 'Esta CI ya está registrada';
+        $errors['Ci'] = 'Su Ci ya esta registrada.';
     }
 
     if ($userModel->findByEmail($email)) {
-        $errors['email'] = 'Este email ya está registrado';
+        $errors['Email'] = 'Su Email ya esta registrado.';
     }
 
     if ($userModel->findByTel($numeroTelefonico)) {
-        $errors['numeroTelefonico'] = 'Este teléfono ya está registrado';
+        $errors['Telefono'] = 'Su Teléfono ya esta registrado.';
     }
+   
+     if (!empty($errors)) {
+      $errorMensaje = implode("<br>", $errors);
+ 
+      $this->session->flash('error', $errorMensaje);
+ 
+      $errorFlash = $this->session->flash('error');
 
-    if (!empty($errors)) {
-        return $this->render('auth/register', [
-            'title' => 'Registro de Usuario',
-            'errors' => $errors,
-            'input' => [
-               'rut' => $rut, 
-               'nombre' => $nombre
-           ]
-        ]);
-    }
+    return $this->render('auth/register', [
+        'title' => 'Registro de Usuario',
+        'error' => $errorFlash,
+        'input' => [
+            'rut' => $rut,
+            'nombre' => $nombre
+        ]
+    ]);
+   }
+    
+ 
+   
+   
 
     $userId=$this->auth->register([
         'rut' => $rut,

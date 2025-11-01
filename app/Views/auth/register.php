@@ -1,3 +1,8 @@
+<?php if (!empty($error)): ?>
+ <div class ="alert alert-danger">
+  <?= $error ?>
+ </div>
+<?php endif;?>
 <div class="register-container">
    <div class="register-image">
     <img src="images/register.png">

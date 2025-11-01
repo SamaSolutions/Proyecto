@@ -36,18 +36,18 @@
                 <strong>El Origen de la Idea:</strong> Todo comenzó con la frustración compartida al ver lo complicado que era, tanto para pequeñas empresas como para particulares, ofrecer sus productos y servicios en un mercado digital complejo y fragmentado. El equipo, una mezcla explosiva de talentos técnicos, decidió que ya era hora de crear una solución simple, robusta y con propósito.
             </p>
             <p>
-                El nombre, *SAMA*, es el pilar de este compromiso, formado por las iniciales de sus fundadores, cada uno con un rol clave:
+                El nombre, <strong>SAMA</strong> , es el pilar de este compromiso, formado por las iniciales de sus fundadores, cada uno con un rol clave:
                 <ul>
-                    <li>*S - Santiago (El Arquitecto Visual):* El principal motor del *Front-End*. Es el responsable de que todo lo que ves sea intuitivo, atractivo y fácil de usar. Por eso, su "S" es la letra más destacada en nuestro logo.</li>
-                    <li>*A - Alex (El Integrador):* Enfocado en el *Front-End*, es el puente entre el diseño y la lógica, asegurando que cada función se integre sin fallos.</li>
-                    <li>*M - Mateo (El Guardián del Servidor):* El cerebro del *Back-End* especializado en la estabilidad. Sus conocimientos en conexión *SSH* y gestión de servidores garantizan que tus datos y tu experiencia sean siempre seguros y fiables.</li>
-                    <li>*A - Ariel (El Motor Global):* El *"todo terreno"* y principal arquitecto del *Back-End*. Es quien une las piezas, construye las API y programa las funciones más complejas.</li>
+                    <li>S - Santiago (El Arquitecto Visual): El principal motor del Front-End. Es el responsable de que todo lo que ves sea intuitivo, atractivo y fácil de usar. Por eso, su "S" es la letra más destacada en nuestro logo.</li>
+                    <li>A - Alex (El Integrador):* Enfocado en el Front-End, es el puente entre el diseño y la lógica, asegurando que cada función se integre sin fallos.</li>
+                    <li>M - Mateo (El Guardián del Servidor): El cerebro del Back-End especializado en la estabilidad. Sus conocimientos en conexión SSH y gestión de servidores garantizan que tus datos y tu experiencia sean siempre seguros y fiables.</li>
+                    <li>A - Ariel (El Motor Global):* El "todo terreno" y principal arquitecto del Back-End. Es quien une las piezas, construye las API y programa las funciones más complejas.</li>
                 </ul>
             </p>
             <p>
                 <strong>Nuestra Misión:</strong> Nuestro proyecto tiene como fin poder conectar de manera eficiente a usuarios compradores con usuarios vendedores, proporcionando todas las herramientas y funciones para que esa relación comercial sea exitosa.
             </p>
-            <p> Creemos firmemente en *la transparencia, la seguridad y el soporte continuo. Este proyecto es el resultado de incontables horas de dedicación, *debugueo y café, con el único objetivo de ofrecer soluciones tecnológicas accesibles y eficientes para que puedas dedicarte a lo que realmente importa: tu negocio.
+            <p> Creemos firmemente en la transparencia, la seguridad y el soporte continuo. Este proyecto es el resultado de incontables horas de dedicación, debugueo y café, con el único objetivo de ofrecer soluciones tecnológicas accesibles y eficientes para que puedas dedicarte a lo que realmente importa: tu negocio.
             </p>
             <p>
                 ¡Gracias por interesarte en nuestra historia y por ser parte de la comunidad SamaSolutions!
