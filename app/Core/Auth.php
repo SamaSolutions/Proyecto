@@ -40,6 +40,11 @@ class Auth {
      */
     public function attempt($email, $password) {
         $user = $this->userModel->findByEmail($email);
+        
+        if (!$user || !isset($user['password_hash'])){
+          return false;
+        }
+        
         $user["rutAdmin"]=$this->userModel->findAdmin($user['rut'])?? '';
         if ($user && password_verify($password, $user['password_hash'])) {
             // No almacenar la contraseña en la sesión
