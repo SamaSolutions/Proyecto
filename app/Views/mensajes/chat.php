@@ -1,3 +1,4 @@
+
 <div class="chat-page-layout">
 
     <div class="service-details-panel">
@@ -10,22 +11,20 @@
             <p><strong>Descripción:</strong></p>
             <p class="description-text"><?php echo nl2br(htmlspecialchars($servicio['descripcion'] ?? 'Sin descripción.')); ?></p>
             
-            <hr>
+             <hr>
 
-            <h4>Calificar al Vendedor</h4>
-            <div id="rating-component" data-target-rut="<?php echo htmlspecialchars($rutDestinatario ?? ''); ?>">
-                <div class="stars-container" data-current-rating="0"> <?php for ($i = 0.5; $i <= 5.0; $i += 0.5): ?>
-                        <span class="star" data-rating="<?php echo $i; ?>">★</span>
-                    <?php endfor; ?>
-                </div>
-                <p>Tu calificación: <span id="current-rating">0.0</span> / 5</p>
-                <button id="submit-rating" disabled>Enviar Calificación</button>
-                <div id="rating-message" style="margin-top: 10px;"></div>
-            </div>
-            
-        </div>
+<h4>Opciones de la Conversación</h4>
+<p><?php echo $conversacion_id?></p>
+<button id="close-chat-button" class="btn btn-danger" 
+        data-conversacion-id="<?php echo htmlspecialchars($conversacion_id ?? ''); ?>">
+    Cerrar Chat y Finalizar
+</button>
+
+<div id="close-chat-message" style="margin-top: 10px;"></div>
+       </div>
     </div>
-    
+   <hr>
+
     <div class="chat-main-panel">
         <div class="chat-container">
             <h2>Chat con <?php echo htmlspecialchars($servicio['dueño']); ?></h2>
@@ -64,5 +63,5 @@
 </script>
 
 <script src="/js/chat.js"></script>
-<script src="/js/rating.js"></script>
+<script src="/js/cerrarChat.js"></script>
 

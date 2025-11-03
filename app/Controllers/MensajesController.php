@@ -62,12 +62,16 @@ class MensajesController extends Controller {
     if ($idServicio === 0 || empty($idServicio)) {
         $idServicio = null;
     }
-
+    
+    if ($rutUsuario === $rutDestinatario){
+     $this->session->flash('error', 'No puedes contactarte a ti mismo.');
+     return $this->redirect("/explorar");
+    }
     // 2. VALIDACIÓN BÁSICA
-    if (!$rutUsuario || !$rutDestinatario || $rutUsuario === $rutDestinatario) {
-        $this->session->flash('Error', 'Datos de chat incompletos o inválidos.');
-        $this->redirect("/explorar");
-        return; 
+    if (!$rutUsuario || !$rutDestinatario) {
+        $this->session->flash('error', 'Datos de chat incompletos o inválidos.');
+        return $this->redirect("/explorar");
+         
     }
 
      
@@ -103,7 +107,7 @@ class MensajesController extends Controller {
         $this->render("/mensajes/chat", $data);
 
     } else {
-        $this->session->flash('Error', 'Error al crear la conversación en la base de datos.');
+        $this->session->flash('error', 'Error al crear la conversación en la base de datos.');
         $this->redirect("/explorar");
     }
 } 
@@ -181,41 +185,47 @@ class MensajesController extends Controller {
         ]);
     }
 
-    public function mostrarChat($idConversacion) {
-       if(is_array($idConversacion)) {
-            $idConversacion = $idConversacion['id'] ?? '';
-        }
-        
-        $rutUsuario = $this->getRutUsuario();
-        
-        if (empty($idConversacion)) {
-            die('Error: ID de Conversación no proporcionado o inválido.');
-        }
+   public function mostrarChat($idConversacion) {
+    
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    $uri_segments = array_filter(explode('/', trim($uri, '/'))); 
+    
+    $idConversacion = (int) end($uri_segments); 
 
-        $idConversacion = (int) $idConversacion;
-         
-        if (!$rutUsuario) {
-            die('Error: No autenticado.');
-        }
-
-        if (!$this->modeloConversacion->esParticipante($idConversacion, $rutUsuario)) {
-          die('Error: Prohibido. No tienes permiso para ver este chat.');
-        }
-        $servicio = $this->modeloServicio->findByIdEspecifica($this->modeloServicio->findByIdConversacion($idConversacion)); 
-        $servicio["dueño"]=$this->modeloConversacion->getNombreDueño($rutUsuario, $idConversacion);
-        $historial = $this->modeloMensaje->getHistorial($idConversacion);
-        $ultimoId = empty($historial) ? 0 : end($historial)['id'];
-
-        $this->render("mensajes/chat", [
-            "titulo" => "Chat", 
-            "historial" => $historial,
-            "conversacion_id" => $idConversacion,
-            "ultimoId" => $ultimoId,
-            "miRut" => $rutUsuario,
-            "servicio" => $servicio
-        ]);
+    if ($idConversacion <= 0) {
+        header('Location: /mis-chats?error=ID_no_capturada');
+        exit(); 
     }
     
+    $rutUsuario = $this->getRutUsuario();
+    if (!$rutUsuario) {
+        die('Error: No autenticado.');
+    }
+
+    if (!$this->modeloConversacion->esParticipante($idConversacion, $rutUsuario)) {
+        die('Error: Prohibido. No tienes permiso para ver este chat.');
+    }
+    
+    $servicio = $this->modeloServicio->findByIdEspecifica($this->modeloServicio->findByIdConversacion($idConversacion));
+    
+    if (!$servicio) {
+         header('Location: /mis-chats?error=servicio_no_encontrado');
+         exit();
+    }
+    
+    $servicio["dueño"] = $this->modeloConversacion->getNombreDueño($rutUsuario, $idConversacion);
+    $historial = $this->modeloMensaje->getHistorial($idConversacion);
+    $ultimoId = empty($historial) ? 0 : end($historial)['id'];
+
+    $this->render("mensajes/chat", [
+        "titulo" => "Chat",
+        "historial" => $historial,
+        "conversacion_id" => $idConversacion,
+        "ultimoId" => $ultimoId,
+        "miRut" => $rutUsuario,
+        "servicio" => $servicio
+    ]);
+} 
 
 public function mostrarBandejaEntrada() {
     $rutUsuario = $this->getRutUsuario();
@@ -232,6 +242,101 @@ public function mostrarBandejaEntrada() {
         "conversaciones" => $conversaciones,
         "miRut" => $rutUsuario
     ]);
- }      
+ }     
+
+  public function cerrarChat() {
+
+    header('Content-Type: application/json');
+    $response = ['status' => 'error', 'message' => 'Error desconocido.'];
+
+    $input_data = file_get_contents('php://input');
+    $input = json_decode($input_data, true);
+    $conversacion_id = $input['conversacion_id'] ?? null;
+    
+
+    $user = $this->session->get('user');
+    
+    if (!is_array($user) || !isset($user['rut'])) {
+        $response['message'] = 'Usuario no autenticado o sesión inválida.';
+        echo json_encode($response);
+        exit(); 
+    }
+    
+    $rut_usuario_actual = $user['rut']; 
+    
+    $rut_usuario_actual_clean = preg_replace('/[^0-9kK]/', '', $rut_usuario_actual);
+    
+
+    if (!$conversacion_id) {
+        $response['message'] = 'ID de conversación no recibida.';
+        echo json_encode($response);
+        exit(); 
+    }
+
+
+    if (!$this->modeloConversacion->esParticipante($conversacion_id, $rut_usuario_actual_clean)) {
+        
+        $response['message'] = 'No tienes permiso para borrar este chat.';
+        
+        
+        echo json_encode($response);
+        exit();
+    }
+    
+    
+    $deleted = $this->modeloConversacion->deleteById($conversacion_id);
+
+    // 6. Devolver la respuesta final
+    if ($deleted) {
+        $response = ['status' => 'success', 'message' => 'Conversación eliminada con éxito.'];
+    } else {
+        $response['message'] = 'Error al eliminar la conversación en la base de datos.';
+    }
+
+    echo json_encode($response);
+    $this->redirect("/");
+    exit(); 
+}
+
+
+    public function deleteSimple($conversacion_id) {
+
+    $conversacion_id = (int) $conversacion_id['id'];
+
+    if ($conversacion_id <= 0) {
+        header("Location: /explorar");
+        exit();
+    }
+    
+    $user = $this->session->get('user');
+    $raw_rut = $user['rut'] ?? '';
+    $rut_usuario_actual = preg_replace('/[^0-9kK]/', '', $raw_rut);
+
+    if (empty($rut_usuario_actual)) {
+        header("Location: /login?error=no_rut_session");
+        exit();
+    }
+
+    if (!$this->modeloConversacion->esParticipante($conversacion_id, $rut_usuario_actual)) {
+        
+        $debug_rut = urlencode($rut_usuario_actual);
+        $debug_id = urlencode($conversacion_id);
+        
+        header("Location: /");
+        exit();
+    }
+
+    // Ejecución del borrado
+    $deleted = $this->modeloConversacion->deleteById($conversacion_id);
+
+    if ($deleted) {
+        header("Location: /mensajes/inbox");
+    } else {
+        // Fallo en la DB (ForeignKey o error SQL)
+        header("Location: /");
+    }
+    exit();
+}
+ 
 }
 

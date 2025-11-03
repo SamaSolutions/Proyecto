@@ -1,51 +1,51 @@
 const data = [
   {
     tipo: "Hogar y Mantenimiento",
-    categorias: ["Plomeria", "Electricidad", "Limpieza", "Jardineria", "Carpinteria"]
+    categorias: ["Plomería", "Electricidad", "Limpieza", "Jardinería", "Carpintería"]
   },
   {
-    tipo: "Construccion y Reformas",
-    categorias: ["Albanileria", "Pintura", "Herrería", "Instalaciones", "Impermeabilizacion"]
+    tipo: "Construcción y Reformas",
+    categorias: ["Albañilería", "Pintura", "Herrería", "Instalaciones", "Impermeabilización"]
   },
   {
-    tipo: "Tecnologia y Soporte Tecnico",
-    categorias: ["Reparacion de PC", "Redes", "Soporte remoto", "Celulares", "Camaras de seguridad"]
+    tipo: "Tecnología y Soporte Técnico",
+    categorias: ["Reparación de PC", "Redes", "Soporte remoto", "Celulares", "Cámaras de seguridad"]
   },
   {
     tipo: "Salud y Bienestar",
-    categorias: ["Masajes", "Nutricion", "Estetica", "Terapias alternativas", "Entrenamiento"]
+    categorias: ["Masajes", "Nutrición", "Estética", "Terapias alternativas", "Entrenamiento"]
   },
   {
-    tipo: "Educacion y Clases",
-    categorias: ["Clases particulares", "Idiomas", "Musica", "Programacion", "Apoyo escolar"]
+    tipo: "Educación y Clases",
+    categorias: ["Clases particulares", "Idiomas", "Música", "Programación", "Apoyo escolar"]
   },
   {
     tipo: "Transporte y Mudanzas",
-    categorias: ["Fletes", "Mudanzas", "Motoenvios", "Chofer privado", "Repartos"]
+    categorias: ["Fletes", "Mudanzas", "Motoenvíos", "Chofer privado", "Repartos"]
   },
   {
     tipo: "Eventos y Entretenimiento",
-    categorias: ["Fotografia", "DJ", "Organizacion de eventos", "Animadores", "Decoracion"]
+    categorias: ["Fotografía", "DJ", "Organización de eventos", "Animadores", "Decoración"]
   },
   {
     tipo: "Cuidado Personal y Belleza",
-    categorias: ["Peluqueria", "Maquillaje", "Manicuria", "Barberia", "Depilacion"]
+    categorias: ["Peluquería", "Maquillaje", "Manicura", "Barbería", "Depilación"]
   },
   {
     tipo: "Servicios Profesionales",
-    categorias: ["Abogados", "Contadores", "Arquitectos", "Psicologos", "Traductores"]
+    categorias: ["Abogados", "Contadores", "Arquitectos", "Psicólogos", "Traductores"]
   },
   {
     tipo: "Mascotas y Animales",
-    categorias: ["Paseadores", "Bano y corte", "Entrenamiento", "Cuidado a domicilio", "Veterinario"]
+    categorias: ["Paseadores", "Baño y corte", "Entrenamiento", "Cuidado a domicilio", "Veterinario"]
   },
   {
-    tipo: "Reparaciones y Tecnicos",
-    categorias: ["Electrodomesticos", "Aire acondicionado", "Gasistas", "Mantenimiento general"]
+    tipo: "Reparaciones y Técnicos",
+    categorias: ["Electrodomésticos", "Aire acondicionado", "Gasistas", "Mantenimiento general"]
   },
   {
-    tipo: "Diseno y Marketing",
-    categorias: ["Diseno grafico", "Redes sociales", "Publicidad", "Fotografia de producto"]
+    tipo: "Diseño y Marketing",
+    categorias: ["Diseño gráfico", "Redes sociales", "Publicidad", "Fotografía de producto"]
   }
 ];
 

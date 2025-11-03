@@ -122,4 +122,27 @@ public function getConversacionesPorRut($rutUsuario) {
     return $resultado['rutDestinatario'] ?? null;
 }
 
+
+public function deleteById($id){
+    $id = (int)$id; // Aseguramos que sea entero
+
+    $this->db->query("
+        DELETE FROM Mensajes 
+        WHERE idConversacion = ?", 
+        [$id]
+    );
+
+    $query = $this->db->query("
+        DELETE FROM Conversaciones 
+        WHERE id = ?", 
+        [$id]
+    );
+
+    if (method_exists($this->db, 'affected_rows')) {
+        return $this->db->affected_rows() > 0;
+    }
+
+    return true; 
+}
+  
 } 

@@ -44,3 +44,5 @@ $router->addRoute("GET", "/mensajes/chat/:id", "MensajesController@mostrarChat",
 $router->addRoute("GET", "/mensajes/inbox", "MensajesController@mostrarBandejaEntrada", [AuthMiddleware::class]);
 $router->addRoute("GET", "/api/notificaciones/recientes", "NotificacionController@getRecientes", [AuthMiddleware::class]);
 $router->addRoute("POST", "/api/notificaciones/marcar-leida", "NotificacionController@marcarLeida", [AuthMiddleware::class]);
+$router->addRoute("POST", "/mensajes/cerrarChat", "MensajesController@cerrarChat");
+$router->addRoute("GET", "/mensajes/delete-simple/:id", "MensajesController@deleteSimple", [AuthMiddleware::class]);
