@@ -13,6 +13,11 @@ services:
       - db
     networks:
       - red_interna
+    environment:
+      DB_HOST: db
+      DB_USER: proyutu
+      DB_PASSWORD: 12345678
+      DB_NAME: proyutu
 
   db:
     image: mariadb:10.6
