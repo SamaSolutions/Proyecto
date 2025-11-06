@@ -14,7 +14,6 @@
              <hr>
 
 <h4>Opciones de la Conversación</h4>
-<p><?php echo $conversacion_id?></p>
 <button id="close-chat-button" class="btn btn-danger" 
         data-conversacion-id="<?php echo htmlspecialchars($conversacion_id ?? ''); ?>">
     Cerrar Chat y Finalizar

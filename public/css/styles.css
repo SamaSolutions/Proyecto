@@ -1703,12 +1703,12 @@
     /* Paleta de colores estilo WhatsApp */
     --color-fondo-principal: #dad8d8; /* Gris claro para contenedores/input */
     --color-fondo-chat: #e5ddd5; /* Fondo del área de mensajes */
-    --color-burbuja-enviada: #d9fdd3; /* Verde claro de WhatsApp */
+    --color-burbuja-enviada: #ba91ff; /* Morado claro */
     --color-burbuja-recibida: #fff; /* Blanco */
     --color-texto: #111b21;
     --color-hora: #7a8286;
-    --color-verde-primario: #008069; /* Verde oscuro para cabecera/botones */
-    --color-verde-claro: #1ad35e; /* Para hover/activo */
+    --color-morado-primario: #673ab7; /* Morado para cabecera/botones */
+    --color-morado-claro: #8947ff; /* Para hover/activo */
     --color-estrella-activa: gold;
     --color-estrella-inactiva: #ccc;
 }
@@ -1749,7 +1749,7 @@
 }
 
 .service-details-panel h3, .service-details-panel h4 {
-    color: var(--color-verde-primario);
+    color: var(--color-morado-primario);
     margin-bottom: 15px;
     border-bottom: 2px solid var(--color-fondo-principal);
     padding-bottom: 5px;
@@ -1812,7 +1812,7 @@
 
 
 #submit-rating {
-    background-color: var(--color-verde-primario);
+    background-color: var(--color-morado-primario);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -1824,7 +1824,7 @@
 }
 
 #submit-rating:hover:not(:disabled) {
-    background-color: var(--color-verde-claro);
+    background-color: var(--color-morado-claro);
 }
 
 #submit-rating:disabled {
@@ -1852,7 +1852,7 @@
 /* Título Fijo - Cabecera del Chat */
 .chat-container h2 {
     padding: 15px;
-    background-color: var(--color-verde-primario);
+    background-color: var(--color-morado-primario);
     color: white;
     font-size: 1.2em;
     flex-shrink: 0; /* Evita que el título se encoja */
@@ -1892,7 +1892,7 @@
 }
 
 #boton-enviar {
-    background-color: var(--color-verde-primario);
+    background-color: var(--color-morado-primario);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -1904,7 +1904,7 @@
 }
 
 #boton-enviar:hover {
-    background-color: var(--color-verde-claro);
+    background-color: var(--color-morado-claro);
 }
 
 /* --------------------------------- */
@@ -1939,7 +1939,7 @@
 
 .mensaje strong {
     font-weight: bold;
-    color: var(--color-verde-primario);
+    color: var(--color-morado-primario);
     margin-right: 5px;
 }
 
